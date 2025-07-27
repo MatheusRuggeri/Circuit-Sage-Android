@@ -1,0 +1,24 @@
+
+{
+  "levelId": "level_random_010",
+  "levelName": "Randomizer Kappa",
+  "levelDescription": "A NOT and an OR. What will happen?",
+  "category": "Random",
+  "grid": { "rows": 7, "cols": 5 },
+  "nodes": [
+    { "id": "input_A_rand10", "type": "Input", "label": "R1", "row": 6, "col": 1 },
+    { "id": "input_B_rand10", "type": "Input", "label": "R2", "row": 6, "col": 3 },
+    { "id": "not_1_rand10", "type": "NOT", "label": "NOT", "row": 4, "col": 1 },
+    { "id": "or_1_rand10", "type": "OR", "label": "OR", "row": 2, "col": 2 },
+    { "id": "output_X_rand10", "type": "Output", "label": "Out", "row": 0, "col": 2 }
+  ],
+  "connections": [
+    { "from": "input_A_rand10", "to": "not_1_rand10" },
+    { "from": "not_1_rand10", "to": "or_1_rand10" },
+    { "from": "input_B_rand10", "to": "or_1_rand10" },
+    { "from": "or_1_rand10", "to": "output_X_rand10" }
+  ],
+  "initialInputs": { "input_A_rand10": true, "input_B_rand10": false },
+  "targetOutputs": { "output_X_rand10": true },
+  "starRatings": { "threeStars": 1, "twoStars": 2, "oneStar": 3 }
+}

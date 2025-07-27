@@ -1,0 +1,23 @@
+
+{
+  "levelId": "level_random_001",
+  "levelName": "Randomizer Alpha",
+  "levelDescription": "A surprising NOT gate challenge!",
+  "category": "Random",
+  "grid": {
+    "rows": 5,
+    "cols": 3
+  },
+  "nodes": [
+    { "id": "input_A_rand1", "type": "Input", "label": "R1", "row": 4, "col": 1 },
+    { "id": "not_1_rand1", "type": "NOT", "label": "NOT", "row": 2, "col": 1 },
+    { "id": "output_X_rand1", "type": "Output", "label": "Out", "row": 0, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_A_rand1", "to": "not_1_rand1" },
+    { "from": "not_1_rand1", "to": "output_X_rand1" }
+  ],
+  "initialInputs": { "input_A_rand1": false },
+  "targetOutputs": { "output_X_rand1": true },
+  "starRatings": { "threeStars": 1, "twoStars": 2, "oneStar": 3 }
+}

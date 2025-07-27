@@ -1,0 +1,22 @@
+
+{
+  "levelId": "level_random_008",
+  "levelName": "Randomizer Theta",
+  "levelDescription": "Double NOT, double the fun?",
+  "category": "Random",
+  "grid": { "rows": 7, "cols": 3 },
+  "nodes": [
+    { "id": "input_A_rand8", "type": "Input", "label": "R1", "row": 6, "col": 1 },
+    { "id": "not_1_rand8", "type": "NOT", "label": "NOT", "row": 4, "col": 1 },
+    { "id": "not_2_rand8", "type": "NOT", "label": "NOT", "row": 2, "col": 1 },
+    { "id": "output_X_rand8", "type": "Output", "label": "Out", "row": 0, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_A_rand8", "to": "not_1_rand8" },
+    { "from": "not_1_rand8", "to": "not_2_rand8" },
+    { "from": "not_2_rand8", "to": "output_X_rand8" }
+  ],
+  "initialInputs": { "input_A_rand8": true },
+  "targetOutputs": { "output_X_rand8": false },
+  "starRatings": { "threeStars": 1, "twoStars": 2, "oneStar": 3 }
+}
