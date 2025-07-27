@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native'; 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Level, UserProgress, LevelCategory } from './types';
 import { loadLevels, loadLevelById } from './services/levelService';
@@ -222,11 +223,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.screen}> 
-      <View style={styles.contentWrapper}>
-      {renderContent()}
-      </View>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.screen}> 
+        <View style={styles.contentWrapper}>
+        {renderContent()}
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
