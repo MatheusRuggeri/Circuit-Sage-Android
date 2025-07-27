@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Dimensions, BackHandler } from 'react-native';
 import Svg, { Path, Line } from 'react-native-svg';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Level, CircuitNode, NodeType, Connection, LogicNode } from '../../types'; // Assuming types are in the same relative path
 import { simulateCircuit } from '../../services/circuitSolver'; // Assuming services are in the same relative path
 import CircuitNodeDisplay from '../canvas/CircuitNodeDisplay'; // This component also needs to be converted
@@ -56,6 +58,25 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
       setCanvasSize({ width, height });
     }
   };
+
+  // Makes the return Key to return to other screen instead of closing the app
+  useEffect(() => {
+    // This function will be called when the back button is pressed
+    const handleBackPress = () => {
+      onBackToLevels(); // Call your existing function to go back
+      return true;      // Prevent default behavior (closing the app)
+    };
+
+    // Add the event listener when the component mounts
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress
+    );
+
+    // Remove the event listener when the component unmounts
+    return () => backHandler.remove();
+  }, [onBackToLevels]); // Re-run effect if onBackToLevels changes
+
 
   // Reset logic is the same
   useEffect(() => {
@@ -253,96 +274,102 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
   const numberOfGridCols = level.grid?.cols;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.levelName}>{level.levelName}</Text>
-          <Text style={styles.levelDescription}>{level.levelDescription}</Text>
+    // O safe area ajuda a não deixar a tela toda ser utilizada, isso inclui a área dos botões de retorno e a linha de cima
+    <SafeAreaView style={styles.container}>
+      <View style={styles.containerView}>
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.levelName}>
+              {level.levelName.split(" - ")[0]}
+            </Text>
+            { /*<Text style={styles.levelDescription}>{level.levelDescription}</Text> */ }
+          </View>
+          { /* GO BACK BUTTON */ }
+          <TouchableOpacity onPress={onBackToLevels} style={[styles.button, styles.buttonSecondary]}>
+              <Text style={styles.buttonTextSecondary}>↩</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={onBackToLevels} style={[styles.button, styles.buttonSecondary]}>
-            <Text style={styles.buttonTextSecondary}>Back to Levels</Text>
-        </TouchableOpacity>
-      </View>
 
-      <View style={styles.movesContainer}>
-        <Text style={styles.movesText}>
-          Moves: {moveCount}
-          {initialUserProgressStars !== undefined && !isCompletedThisAttempt &&
-            ` (Best: ${initialUserProgressStars} ${initialUserProgressStars === 1 ? "star" : "stars"})`}
-        </Text>
-      </View>
+        <View style={styles.movesContainer}>
+          <Text style={styles.movesText}>
+            Moves: {moveCount}
+            {initialUserProgressStars !== undefined && !isCompletedThisAttempt &&
+              ` (Best: ${initialUserProgressStars} ${initialUserProgressStars === 1 ? "star" : "stars"})`}
+          </Text>
+        </View>
 
-      <View
-        onLayout={onLayout}
-        style={styles.gameArea}
-      >
-        { (canvasSize.width > 0 && canvasSize.height > 0) && (
-          <>
-            <Svg width="100%" height="100%" style={StyleSheet.absoluteFill}>
-              {level.connections.map((conn, index) => {
-                const fromNodePos = nodePositions[conn.from];
-                const toNodePos = nodePositions[conn.to];
-                const fromNodeState = simulatedNodes[conn.from];
-                if (!fromNodePos || !toNodePos || !fromNodeState) return null;
-                // NOTE: WireDisplay component will also need conversion to use react-native-svg
-                return (
-                  <WireDisplay
-                    key={`wire-${conn.from}-${conn.to}-${index}`}
-                    startX={fromNodePos.x} startY={fromNodePos.y}
-                    endX={toNodePos.x} endY={toNodePos.y}
-                    isActive={fromNodeState.value || false}
-                    nodeWidth={currentNodeDimensions.width} nodeHeight={currentNodeDimensions.height}
-                  />
-                );
-              })}
-            </Svg>
-            {visibleNodes.map(node => (
-              // NOTE: CircuitNodeDisplay component will also need conversion
-              <CircuitNodeDisplay
-                key={node.id}
-                node={{...node, x: nodePositions[node.id]?.x, y: nodePositions[node.id]?.y}}
-                onToggleInput={node.type === NodeType.Input ? () => handleToggleInput(node.id) : undefined}
-                isTargetMet={node.type === NodeType.Output ? node.isTargetMet : undefined}
-                outputGoal={node.type === NodeType.Output ? level.targetOutputs[node.id] : undefined}
-                renderWidth={currentNodeDimensions.width} renderHeight={currentNodeDimensions.height}
-                numberOfGridCols={numberOfGridCols}
-              />
-            ))}
-          </>
-        )}
-      </View>
-      
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isCompletionModalOpen}
-        onRequestClose={handleModalClose}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Level Complete!</Text>
-            <View style={styles.starsContainer}>
-              {Array.from({ length: starsEarnedInModal }).map((_, i) => (
-                <StarIcon key={i} style={styles.starYellow} />
+        <View
+          onLayout={onLayout}
+          style={styles.gameArea}
+        >
+          { (canvasSize.width > 0 && canvasSize.height > 0) && (
+            <>
+              <Svg width="100%" height="100%" style={StyleSheet.absoluteFill}>
+                {level.connections.map((conn, index) => {
+                  const fromNodePos = nodePositions[conn.from];
+                  const toNodePos = nodePositions[conn.to];
+                  const fromNodeState = simulatedNodes[conn.from];
+                  if (!fromNodePos || !toNodePos || !fromNodeState) return null;
+                  // NOTE: WireDisplay component will also need conversion to use react-native-svg
+                  return (
+                    <WireDisplay
+                      key={`wire-${conn.from}-${conn.to}-${index}`}
+                      startX={fromNodePos.x} startY={fromNodePos.y}
+                      endX={toNodePos.x} endY={toNodePos.y}
+                      isActive={fromNodeState.value || false}
+                      nodeWidth={currentNodeDimensions.width} nodeHeight={currentNodeDimensions.height}
+                    />
+                  );
+                })}
+              </Svg>
+              {visibleNodes.map(node => (
+                // NOTE: CircuitNodeDisplay component will also need conversion
+                <CircuitNodeDisplay
+                  key={node.id}
+                  node={{...node, x: nodePositions[node.id]?.x, y: nodePositions[node.id]?.y}}
+                  onToggleInput={node.type === NodeType.Input ? () => handleToggleInput(node.id) : undefined}
+                  isTargetMet={node.type === NodeType.Output ? node.isTargetMet : undefined}
+                  outputGoal={node.type === NodeType.Output ? level.targetOutputs[node.id] : undefined}
+                  renderWidth={currentNodeDimensions.width} renderHeight={currentNodeDimensions.height}
+                  numberOfGridCols={numberOfGridCols}
+                />
               ))}
-              {Array.from({ length: 3 - starsEarnedInModal }).map((_, i) => (
-                <StarIcon key={`empty-${i}`} style={styles.starGray} />
-              ))}
-            </View>
-            <Text style={styles.modalText}>You earned {starsEarnedInModal} {starsEarnedInModal === 1 ? "star" : "stars"}!</Text>
-            <Text style={styles.modalSubText}>Moves: {moveCount}</Text>
-            <View style={styles.modalButtonContainer}>
-                <TouchableOpacity onPress={handleModalNextLevel} style={[styles.button, styles.buttonPrimary, styles.modalButton]}>
-                    <Text style={styles.buttonTextPrimary}>Next Level</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleModalGoBack} style={[styles.button, styles.buttonSecondary, styles.modalButton]}>
-                    <Text style={styles.buttonTextSecondary}>Back to Levels</Text>
-                </TouchableOpacity>
+            </>
+          )}
+        </View>
+        
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isCompletionModalOpen}
+          onRequestClose={handleModalClose}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Level Complete!</Text>
+              <View style={styles.starsContainer}>
+                {Array.from({ length: starsEarnedInModal }).map((_, i) => (
+                  <StarIcon key={i} style={styles.starYellow} />
+                ))}
+                {Array.from({ length: 3 - starsEarnedInModal }).map((_, i) => (
+                  <StarIcon key={`empty-${i}`} style={styles.starGray} />
+                ))}
+              </View>
+              <Text style={styles.modalText}>You earned {starsEarnedInModal} {starsEarnedInModal === 1 ? "star" : "stars"}!</Text>
+              <Text style={styles.modalSubText}>Moves: {moveCount}</Text>
+              <View style={styles.modalButtonContainer}>
+                  <TouchableOpacity onPress={handleModalNextLevel} style={[styles.button, styles.buttonPrimary, styles.modalButton]}>
+                      <Text style={styles.buttonTextPrimary}>Next Level</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleModalGoBack} style={[styles.button, styles.buttonSecondary, styles.modalButton]}>
+                      <Text style={styles.buttonTextSecondary}>Back to Levels</Text>
+                  </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -350,7 +377,12 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
+    backgroundColor: '#1e293b', // slate-800
+    borderRadius: 8,
+  },
+  containerView: {
+    flex: 1,
     backgroundColor: '#1e293b', // slate-800
     borderRadius: 8,
   },

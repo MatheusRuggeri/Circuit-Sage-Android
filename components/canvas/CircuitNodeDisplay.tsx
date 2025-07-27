@@ -183,15 +183,15 @@ const CircuitNodeDisplay: React.FC<CircuitNodeDisplayProps> = ({
     <View style={[
       styles.baseNodeContainer,
       {
-        left: (node.x || 0) - BORDER_THICKNESS,
-        top: (node.y || 0) - BORDER_THICKNESS,
+        left: (node.x || 0) - BORDER_THICKNESS,   // Centraliza a porta
+        top: (node.y || 0) - BORDER_THICKNESS,    // Centraliza a porta
         width: renderWidth + BORDER_THICKNESS * 2,
         height: renderHeight + BORDER_THICKNESS * 2,
       },
       isSelected && styles.selectedRing,
     ]}>
       <TouchableOpacity
-        activeOpacity={isInteractive ? 0.7 : 1.0}
+        activeOpacity={isInteractive ? 0.8 : 1.0}
         onPress={handleClick}
         accessibilityRole={isInteractive ? 'button' : 'image'}
         accessibilityLabel={accessibilityLabel}
@@ -203,19 +203,31 @@ const CircuitNodeDisplay: React.FC<CircuitNodeDisplayProps> = ({
             height={renderHeight + BORDER_THICKNESS * 2}
           >
             <G transform={`translate(${BORDER_THICKNESS}, ${BORDER_THICKNESS})`}>
-              <Path d={mainShapePath} fill={borderColor} />
-              <Path d={mainShapePath} fill={mainBgColor} transform="scale(0.95)" origin={`${renderWidth/2}, ${renderHeight/2}`}/>
+              <Path
+                d={mainShapePath}
+                fill={borderColor}
+                scale={1.05}
+                originX={renderWidth / 2}
+                originY={renderHeight / 2}
+              />
+              <Path
+                d={mainShapePath}
+                fill={mainBgColor}
+                scale={0.95}
+                originX={renderWidth / 2}
+                originY={renderHeight / 2}
+              />
             </G>
           </Svg>
         ) : (
           // --- Simple View for Input/Output Nodes ---
           <View style={[
             styles.simpleNodeBorder, 
-            { backgroundColor: borderColor, borderRadius: 8 }
+            { backgroundColor: borderColor, borderRadius: 8 } // Raio exterior do input e output
           ]}>
             <View style={[
                 styles.simpleNodeBody, 
-                { backgroundColor: mainBgColor, borderRadius: 6 }
+                { backgroundColor: mainBgColor, borderRadius: 30 } // Raio interior do input e output
             ]} />
           </View>
         )}
@@ -268,7 +280,7 @@ const styles = StyleSheet.create({
   simpleNodeBody: {
     width: '100%',
     height: '100%',
-    transform: [{ scale: 0.92 }],
+    transform: [{ scale: 0.7 }], // This draw the center of the Output
   },
   contentOverlay: {
     position: 'absolute',

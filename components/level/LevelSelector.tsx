@@ -1,7 +1,7 @@
-
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
 import Svg, { Path } from 'react-native-svg'; // <-- Import Svg components
+import { SafeAreaView } from 'react-native-safe-area-context'; // <-- Mude a importação
 
 import { Level, UserProgress, LevelCategory } from '../../types';
 import { LEVEL_CATEGORY_NAMES } from '../../constants';
@@ -76,33 +76,56 @@ const LevelCard: React.FC<{level: Level, onPress: () => void, completedStars?: n
 // ====================================================================
 const LevelSelector: React.FC<LevelSelectorProps> = ({ levels, onSelectLevel, userProgress, categoryName, onBackToCategories }) => {
   const displayCategoryName = LEVEL_CATEGORY_NAMES[categoryName] || categoryName;
+  
+  // Makes the return Key to return to other screen instead of closing the app
+  useEffect(() => {
+    // This function will be called when the back button is pressed
+    const handleBackPress = () => {
+      onBackToCategories(); // Call your existing function to go back
+      return true;      // Prevent default behavior (closing the app)
+    };
+
+    // Add the event listener when the component mounts
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress
+    );
+
+    // Remove the event listener when the component unmounts
+    return () => backHandler.remove();
+  }, [onBackToCategories]); // Re-run effect if onBackToLevels changes
 
   return (
-    // Use ScrollView for content that might exceed the screen height
-    <ScrollView style={styles.container} contentContainerStyle={styles.containerPadding}>
-      <View style={styles.header}>
-        <Text style={styles.categoryTitle}>
-          {displayCategoryName}
-        </Text>
-        <Button onPress={onBackToCategories} variant="secondary">Back to Categories</Button>
-      </View>
-      
-      {levels.length === 0 ? (
-        <Text style={styles.noLevelsText}>No levels in this category yet. Stay tuned!</Text>
-      ) : (
-        // This View creates the "Grid" using Flexbox
-        <View style={styles.gridContainer}>
-          {levels.map(level => (
-            <LevelCard 
-              key={level.levelId} 
-              level={level} 
-              onPress={() => onSelectLevel(level.levelId)}
-              completedStars={userProgress.completedLevels[level.levelId]?.stars}
-            />
-          ))}
+    // Use SafeAreaView como o contêiner principal
+      // Use ScrollView for content that might exceed the screen height
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.containerPadding}>
+        <View style={styles.header}>
+          <Text style={styles.categoryTitle}>
+            { /* COM SPLIT PARA FICAR MAIS CURTO E NÃO SUPERAR O TAMANHO DA TELA*/ }
+            {displayCategoryName.split(" ")[0]}
+          </Text>
+          { /* GO BACK BUTTON */ }
+          <Button onPress={onBackToCategories} variant="secondary">↩</Button>
         </View>
-      )}
-    </ScrollView>
+        
+        {levels.length === 0 ? (
+          <Text style={styles.noLevelsText}>No levels in this category yet. Stay tuned!</Text>
+        ) : (
+          // This View creates the "Grid" using Flexbox
+          <View style={styles.gridContainer}>
+            {levels.map(level => (
+              <LevelCard 
+                key={level.levelId} 
+                level={level} 
+                onPress={() => onSelectLevel(level.levelId)}
+                completedStars={userProgress.completedLevels[level.levelId]?.stars}
+              />
+            ))}
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -151,7 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 8, // rounded-lg
     borderWidth: 2,
     // This creates the "grid item" by taking up roughly half the width
-    width: '48%', // For a 2-column grid. Use '32%' for 3-col, etc.
+    width: '100%', // For a 2-column grid. Use '32%' for 3-col, etc.
     marginBottom: 16, // gap-4
   },
   cardCompleted: {

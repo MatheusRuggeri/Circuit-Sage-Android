@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import Svg, { Path, SvgProps } from 'react-native-svg'; // Import from react-native-svg
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Level, UserProgress, LevelCategory } from '../../types';
 import { LEVEL_CATEGORY_NAMES, UNLOCK_THRESHOLD_PERCENTAGE, ACHIEVEMENT_ID_UNLOCK_INTERMEDIATE } from '../../constants';
@@ -108,62 +109,64 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({ allLevels, userProg
   ];
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Select Your Path</Text>
-        <Text style={styles.subtitle}>Master logic circuits by progressing through categories.</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Start Your Path</Text>
+          <Text style={styles.subtitle}>Master logic circuits by progressing through categories.</Text>
+        </View>
 
-      <View style={styles.categoryList}>
-        {categoriesToDisplay.map(({ id, name, progressData, isUnlocked, description, unlockMessage, action, categoryType }) => (
-          <TouchableOpacity
-            key={id}
-            style={[styles.card, !isUnlocked && styles.cardDisabled]}
-            onPress={() => isUnlocked && action()}
-            activeOpacity={isUnlocked ? 0.7 : 1}
-            accessibilityRole={isUnlocked ? 'button' : 'none'}
-            accessibilityState={{ disabled: !isUnlocked }}
-            accessibilityLabel={`${name}. ${description} ${isUnlocked ? 'Press to open.' : `Locked. ${unlockMessage || ''}`}`}
-          >
-            <View style={styles.cardHeader}>
-              <View style={styles.cardHeaderText}>
-                <Text style={styles.cardTitle}>{name}</Text>
-                <Text style={styles.cardDescription}>{description}</Text>
-              </View>
-              {!isUnlocked && <LockIcon style={styles.lockIcon} width={32} height={32} />}
-            </View>
-
-            {progressData.levelsExist && (
-              <View style={styles.progressContainer}>
-                <View style={styles.progressLabels}>
-                  <Text style={styles.progressText}>Progress: {progressData.completed} / {progressData.total}</Text>
-                  <Text style={styles.progressText}>{Math.round(progressData.percentage * 100)}%</Text>
+        <View style={styles.categoryList}>
+          {categoriesToDisplay.map(({ id, name, progressData, isUnlocked, description, unlockMessage, action, categoryType }) => (
+            <TouchableOpacity
+              key={id}
+              style={[styles.card, !isUnlocked && styles.cardDisabled]}
+              onPress={() => isUnlocked && action()}
+              activeOpacity={isUnlocked ? 0.7 : 1}
+              accessibilityRole={isUnlocked ? 'button' : 'none'}
+              accessibilityState={{ disabled: !isUnlocked }}
+              accessibilityLabel={`${name}. ${description} ${isUnlocked ? 'Press to open.' : `Locked. ${unlockMessage || ''}`}`}
+            >
+              <View style={styles.cardHeader}>
+                <View style={styles.cardHeaderText}>
+                  <Text style={styles.cardTitle}>{name}</Text>
+                  <Text style={styles.cardDescription}>{description}</Text>
                 </View>
-                <View style={styles.progressBarBackground}>
-                  <View
-                    style={[
-                      styles.progressBarFill,
-                      !isUnlocked && styles.progressBarFillDisabled,
-                      { width: `${progressData.percentage * 100}%` },
-                    ]}
-                  />
-                </View>
+                {!isUnlocked && <LockIcon style={styles.lockIcon} width={32} height={32} />}
               </View>
-            )}
 
-            {!isUnlocked && unlockMessage && progressData.levelsExist && (
-              <Text style={styles.unlockMessage}>{unlockMessage}</Text>
-            )}
-            {!isUnlocked && !progressData.levelsExist && categoryType !== LevelCategory.Basic && (
-              <Text style={styles.noLevelsMessage}>No levels in this category yet. Check back later!</Text>
-            )}
-            {!isUnlocked && !progressData.levelsExist && categoryType === LevelCategory.Basic && (
-              <Text style={styles.noLevelsMessage}>Basic levels are loading or not available. Please wait or check configuration.</Text>
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
+              {progressData.levelsExist && (
+                <View style={styles.progressContainer}>
+                  <View style={styles.progressLabels}>
+                    <Text style={styles.progressText}>Progress: {progressData.completed} / {progressData.total}</Text>
+                    <Text style={styles.progressText}>{Math.round(progressData.percentage * 100)}%</Text>
+                  </View>
+                  <View style={styles.progressBarBackground}>
+                    <View
+                      style={[
+                        styles.progressBarFill,
+                        !isUnlocked && styles.progressBarFillDisabled,
+                        { width: `${progressData.percentage * 100}%` },
+                      ]}
+                    />
+                  </View>
+                </View>
+              )}
+
+              {!isUnlocked && unlockMessage && progressData.levelsExist && (
+                <Text style={styles.unlockMessage}>{unlockMessage}</Text>
+              )}
+              {!isUnlocked && !progressData.levelsExist && categoryType !== LevelCategory.Basic && (
+                <Text style={styles.noLevelsMessage}>No levels in this category yet. Check back later!</Text>
+              )}
+              {!isUnlocked && !progressData.levelsExist && categoryType === LevelCategory.Basic && (
+                <Text style={styles.noLevelsMessage}>Basic levels are loading or not available. Please wait or check configuration.</Text>
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

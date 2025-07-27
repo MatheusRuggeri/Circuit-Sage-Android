@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import React, { useMemo, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, BackHandler } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Level, UserProgress, LevelCategory } from '../../types';
 import { LEVEL_CATEGORY_NAMES } from '../../constants';
 
@@ -67,74 +69,97 @@ const RandomModeDisplay: React.FC<RandomModeDisplayProps> = ({
     }
   };
 
+  // Makes the return Key to return to other screen instead of closing the app
+  useEffect(() => {
+    // This function will be called when the back button is pressed
+    const handleBackPress = () => {
+      onBackToCategories(); // Call your existing function to go back
+      return true;      // Prevent default behavior (closing the app)
+    };
+
+    // Add the event listener when the component mounts
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress
+    );
+
+    // Remove the event listener when the component unmounts
+    return () => backHandler.remove();
+  }, [onBackToCategories]); // Re-run effect if onBackToLevels changes
+
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>
-          {LEVEL_CATEGORY_NAMES[LevelCategory.Random]}
-        </Text>
-        <TouchableOpacity onPress={onBackToCategories} style={[styles.button, styles.buttonSecondary]}>
-            <Text style={styles.buttonTextSecondary}>Back</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.statsContainer}>
-        <View style={styles.statBox}>
-          <Text style={styles.statLabel}>Average Stars</Text>
-          <Text style={styles.statValue}>{stats.averageStars.toFixed(2)}</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text style={styles.statLabel}>Games Played</Text>
-          <Text style={styles.statValue}>{stats.gamesPlayed}</Text>
-        </View>
-      </View>
-
-      <View style={styles.playButtonContainer}>
-        <TouchableOpacity
-          onPress={handlePlayRandom}
-          disabled={randomLevels.length === 0}
-          style={[
-            styles.button, 
-            styles.buttonPrimary, 
-            styles.playButton,
-            randomLevels.length === 0 && styles.buttonDisabled
-          ]}
-        >
-          <Text style={[styles.buttonTextPrimary, styles.playButtonText]}>
-            {randomLevels.length === 0 ? "No Random Levels Available" : "Play a Random Challenge"}
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>
+            { /* COM SPLIT PARA FICAR MAIS CURTO E NÃO SUPERAR O TAMANHO DA TELA*/ }
+            {LEVEL_CATEGORY_NAMES[LevelCategory.Random].split(" ")[0]}
           </Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity onPress={onBackToCategories} style={[styles.button, styles.buttonSecondary]}>
+              { /* GO BACK BUTTON */ }
+              <Text style={styles.buttonTextSecondary}>↩</Text>
+          </TouchableOpacity>
+        </View>
 
-      {completedRandomLevels.length > 0 && (
-        <View style={styles.listContainer}>
-          <Text style={styles.listHeader}>
-            Previously Completed
-          </Text>
-          <FlatList
-            data={completedRandomLevels}
-            keyExtractor={item => item.levelId}
-            renderItem={({ item }) => {
-              const stars = userProgress.completedLevels[item.levelId]?.stars || 0;
-              return (
-                <View style={styles.listItem}>
-                  <Text style={styles.listItemText}>{item.levelName}</Text>
-                  <View style={styles.starsContainer}>
-                    {Array.from({ length: stars }).map((_, i) => (
-                      <StarIcon key={`star-${i}`} color="#facc15" /> // yellow-400
-                    ))}
-                    {Array.from({ length: 3 - stars }).map((_, i) => (
-                      <StarIcon key={`empty-star-${i}`} color="#475569" /> // slate-600
-                    ))}
+        <View style={styles.statsContainer}>
+          <View style={styles.statBox}>
+            <Text style={styles.statLabel}>Avg. Stars</Text>
+            <Text style={styles.statValue}>{stats.averageStars.toFixed(2)}</Text>
+          </View>
+          <View style={styles.statBox}>
+            <Text style={styles.statLabel}>Games Played</Text>
+            <Text style={styles.statValue}>{stats.gamesPlayed}</Text>
+          </View>
+        </View>
+
+        <View style={styles.playButtonContainer}>
+          <TouchableOpacity
+            onPress={handlePlayRandom}
+            disabled={randomLevels.length === 0}
+            style={[
+              styles.button, 
+              styles.buttonPrimary, 
+              styles.playButton,
+              randomLevels.length === 0 && styles.buttonDisabled
+            ]}
+          >
+            <Text style={[styles.buttonTextPrimary, styles.playButtonText]}>
+              {randomLevels.length === 0 ? "No Random Levels Available" : "Play a Random Challenge"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {completedRandomLevels.length > 0 && (
+          <View style={styles.listContainer}>
+            <Text style={styles.listHeader}>
+              Previously Completed
+            </Text>
+            <FlatList
+              data={completedRandomLevels}
+              keyExtractor={item => item.levelId}
+              renderItem={({ item }) => {
+                const stars = userProgress.completedLevels[item.levelId]?.stars || 0;
+                return (
+                  <View style={styles.listItem}>
+                    <Text style={styles.listItemText}>{item.levelName}</Text>
+                    <View style={styles.starsContainer}>
+                      {Array.from({ length: stars }).map((_, i) => (
+                        <StarIcon key={`star-${i}`} color="#facc15" /> // yellow-400
+                      ))}
+                      {Array.from({ length: 3 - stars }).map((_, i) => (
+                        <StarIcon key={`empty-star-${i}`} color="#475569" /> // slate-600
+                      ))}
+                    </View>
                   </View>
-                </View>
-              );
-            }}
-            scrollEnabled={false} // Disable scroll for the FlatList as the parent is a ScrollView
-          />
-        </View>
-      )}
-    </ScrollView>
+                );
+              }}
+              scrollEnabled={false} // Disable scroll for the FlatList as the parent is a ScrollView
+            />
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -171,7 +196,8 @@ const styles = StyleSheet.create({
   statBox: {
     flex: 1,
     backgroundColor: '#1e293b', // slate-800
-    padding: 24,
+    paddingTop: 12,
+    paddingBottom: 12,
     borderRadius: 8,
     alignItems: 'center',
     shadowColor: '#000',
@@ -181,10 +207,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   statLabel: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: '600',
     color: '#7dd3fc', // sky-300
-    marginBottom: 8,
+    marginBottom: 0,
   },
   statValue: {
     fontSize: 36,
