@@ -1,108 +1,100 @@
 {
-  "levelId": "level_basic_012",
-  "levelName": "Level 12 - Two Paths",
-  "levelDescription": "Control two separate AND gates to match the pattern.",
+  "levelId": "level_0006",
+  "levelName": "Level 6 - Double AND",
+  "levelDescription": "",
   "grid": {
     "rows": 5,
-    "cols": 7
+    "cols": 3
   },
   "nodes": [
     {
-      "id": "input_A",
+      "id": "input_1",
       "type": "Input",
       "label": "A",
       "row": 4,
       "col": 0
     },
     {
-      "id": "input_B",
+      "id": "input_2",
       "type": "Input",
       "label": "B",
       "row": 4,
-      "col": 2
+      "col": 1
     },
     {
-      "id": "input_C",
+      "id": "input_3",
       "type": "Input",
       "label": "C",
       "row": 4,
-      "col": 4
-    },
-    {
-      "id": "input_D",
-      "type": "Input",
-      "label": "D",
-      "row": 4,
-      "col": 6
+      "col": 2
     },
     {
       "id": "and_1",
       "type": "AND",
       "label": "AND",
       "row": 2,
-      "col": 1
+      "col": 0
     },
     {
       "id": "and_2",
       "type": "AND",
       "label": "AND",
       "row": 2,
-      "col": 5
+      "col": 2
     },
     {
-      "id": "output_X",
+      "id": "output_1",
       "type": "Output",
-      "label": "X",
+      "label": "Out",
       "row": 0,
-      "col": 1
+      "col": 0
     },
     {
-      "id": "output_Y",
+      "id": "output_2",
       "type": "Output",
-      "label": "Y",
+      "label": "Out",
       "row": 0,
-      "col": 5
+      "col": 2
     }
   ],
   "connections": [
     {
-      "from": "input_A",
+      "from": "input_1",
       "to": "and_1"
     },
     {
-      "from": "input_B",
+      "from": "input_2",
       "to": "and_1"
     },
     {
-      "from": "input_C",
+      "from": "input_2",
       "to": "and_2"
     },
     {
-      "from": "input_D",
+      "from": "input_3",
       "to": "and_2"
     },
     {
       "from": "and_1",
-      "to": "output_X"
+      "to": "output_1"
     },
     {
       "from": "and_2",
-      "to": "output_Y"
+      "to": "output_2"
     }
   ],
   "initialInputs": {
-    "input_A": false,
-    "input_B": false,
-    "input_C": true,
-    "input_D": true
+    "input_1": false,
+    "input_2": false,
+    "input_3": false
   },
   "targetOutputs": {
-    "output_X": true,
-    "output_Y": false
+    "output_1": true,
+    "output_2": true
   },
   "starRatings": {
     "threeStars": 3,
-    "twoStars": 4,
-    "oneStar": 5
+    "twoStars": 5,
+    "oneStar": 6
   }
 }

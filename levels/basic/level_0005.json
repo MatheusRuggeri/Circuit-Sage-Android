@@ -1,21 +1,21 @@
 {
-  "levelId": "level_basic_010",
-  "levelName": "Level 10 - Keep it Off",
-  "levelDescription": "Sometimes, you need the output to be OFF. There's more than one way to do it.",
+  "levelId": "level_0005",
+  "levelName": "Level 5 - AND it Begins",
+  "levelDescription": "",
   "grid": {
     "rows": 5,
     "cols": 5
   },
   "nodes": [
     {
-      "id": "input_A",
+      "id": "input_1",
       "type": "Input",
       "label": "A",
       "row": 4,
       "col": 1
     },
     {
-      "id": "input_B",
+      "id": "input_2",
       "type": "Input",
       "label": "B",
       "row": 4,
@@ -29,7 +29,7 @@
       "col": 2
     },
     {
-      "id": "output_X",
+      "id": "output_1",
       "type": "Output",
       "label": "Out",
       "row": 0,
@@ -38,28 +38,28 @@
   ],
   "connections": [
     {
-      "from": "input_A",
+      "from": "input_1",
       "to": "and_1"
     },
     {
-      "from": "input_B",
+      "from": "input_2",
       "to": "and_1"
     },
     {
       "from": "and_1",
-      "to": "output_X"
+      "to": "output_1"
     }
   ],
   "initialInputs": {
-    "input_A": true,
-    "input_B": true
+    "input_1": false,
+    "input_2": false
   },
   "targetOutputs": {
-    "output_X": false
+    "output_1": true
   },
   "starRatings": {
-    "threeStars": 1,
-    "twoStars": 2,
-    "oneStar": 3
+    "threeStars": 2,
+    "twoStars": 4,
+    "oneStar": 6
   }
 }

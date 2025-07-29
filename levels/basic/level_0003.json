@@ -1,115 +1,126 @@
 {
-  "levelId": "level_basic_006",
-  "levelName": "Level 6 - Triple Threat",
-  "levelDescription": "Manage three inputs to match the target pattern.",
+  "levelId": "level_0003",
+  "levelName": "Level 3 - Two NOTs",
+  "levelDescription": "",
   "grid": {
     "rows": 5,
-    "cols": 7
+    "cols": 3
   },
   "nodes": [
     {
-      "id": "input_A",
+      "id": "input_1",
       "type": "Input",
       "label": "A",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "id": "input_2",
+      "type": "Input",
+      "label": "B",
       "row": 4,
       "col": 1
     },
     {
-      "id": "input_B",
-      "type": "Input",
-      "label": "B",
-      "row": 4,
-      "col": 3
-    },
-    {
-      "id": "input_C",
+      "id": "input_3",
       "type": "Input",
       "label": "C",
       "row": 4,
-      "col": 5
+      "col": 2
     },
     {
       "id": "not_1",
       "type": "NOT",
       "label": "NOT",
       "row": 2,
-      "col": 1
+      "col": 0
     },
     {
       "id": "not_2",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 3
+      "row": 1,
+      "col": 1
     },
     {
       "id": "not_3",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 5
+      "row": 3,
+      "col": 1
     },
     {
-      "id": "output_X",
+      "id": "not_4",
+      "type": "NOT",
+      "label": "NOT",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "id": "output_1",
       "type": "Output",
-      "label": "X",
+      "label": "Out",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "output_2",
+      "type": "Output",
+      "label": "Out",
       "row": 0,
       "col": 1
     },
     {
-      "id": "output_Y",
+      "id": "output_3",
       "type": "Output",
-      "label": "Y",
+      "label": "Out",
       "row": 0,
-      "col": 3
-    },
-    {
-      "id": "output_Z",
-      "type": "Output",
-      "label": "Z",
-      "row": 0,
-      "col": 5
+      "col": 2
     }
   ],
   "connections": [
     {
-      "from": "input_A",
+      "from": "input_1",
       "to": "not_1"
     },
     {
       "from": "not_1",
-      "to": "output_X"
+      "to": "output_1"
     },
     {
-      "from": "input_B",
+      "from": "input_2",
       "to": "not_2"
     },
     {
       "from": "not_2",
-      "to": "output_Y"
-    },
-    {
-      "from": "input_C",
       "to": "not_3"
     },
     {
       "from": "not_3",
-      "to": "output_Z"
+      "to": "output_2"
+    },
+    {
+      "from": "input_3",
+      "to": "not_4"
+    },
+    {
+      "from": "not_4",
+      "to": "output_3"
     }
   ],
   "initialInputs": {
-    "input_A": true,
-    "input_B": false,
-    "input_C": true
+    "input_1": true,
+    "input_2": false,
+    "input_3": true,
   },
   "targetOutputs": {
-    "output_X": true,
-    "output_Y": true,
-    "output_Z": true
+    "output_1": true,
+    "output_2": true,
+    "output_3": false
   },
   "starRatings": {
     "threeStars": 2,
-    "twoStars": 3,
-    "oneStar": 4
+    "twoStars": 4,
+    "oneStar": 6
   }
 }

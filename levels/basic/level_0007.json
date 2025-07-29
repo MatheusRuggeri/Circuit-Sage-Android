@@ -1,0 +1,93 @@
+{
+  "levelId": "level_0007",
+  "levelName": "Level 7",
+  "levelDescription": "",
+  "grid": {
+    "rows": 6,
+    "cols": 2
+  },
+  "nodes": [
+    {
+      "id": "input_1",
+      "type": "Input",
+      "label": "A",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "input_2",
+      "type": "Input",
+      "label": "B",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "and_1",
+      "type": "AND",
+      "label": "AND",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "and_2",
+      "type": "AND",
+      "label": "AND",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "output_1",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "output_2",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 1
+    }
+  ],
+  "connections": [
+    {
+      "from": "input_1",
+      "to": "and_1"
+    },
+    {
+      "from": "input_2",
+      "to": "and_1"
+    },
+    {
+      "from": "input_2",
+      "to": "and_2"
+    },
+    {
+      "from": "and_1",
+      "to": "and_2"
+    },
+    {
+      "from": "and_1",
+      "to": "output_1"
+    },
+    {
+      "from": "and_2",
+      "to": "output_2"
+    }
+  ],
+  "initialInputs": {
+    "input_1": false,
+    "input_2": false,
+    "input_3": false
+  },
+  "targetOutputs": {
+    "output_1": true,
+    "output_2": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 4,
+    "oneStar": 6
+  }
+}

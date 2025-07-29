@@ -1,7 +1,7 @@
 {
-  "levelId": "level_basic_002",
-  "levelName": "Level 2 - Flip It Off",
-  "levelDescription": "This time, try to turn the output OFF.",
+  "levelId": "level_0001",
+  "levelName": "Level 1 - The Switch",
+  "levelDescription": "Let's start with the basics. A NOT gate flips the signal. Can you turn the output ON?",
   "grid": {
     "rows": 5,
     "cols": 3
@@ -40,10 +40,10 @@
     }
   ],
   "initialInputs": {
-    "input_A": false
+    "input_A": true
   },
   "targetOutputs": {
-    "output_X": false
+    "output_X": true
   },
   "starRatings": {
     "threeStars": 1,
