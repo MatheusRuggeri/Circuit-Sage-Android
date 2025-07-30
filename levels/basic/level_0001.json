@@ -4,28 +4,28 @@
   "levelDescription": "Let's start with the basics. A NOT gate flips the signal. Can you turn the output ON?",
   "grid": {
     "rows": 5,
-    "cols": 3
+    "cols": 1
   },
   "nodes": [
     {
       "id": "input_A",
       "type": "Input",
       "label": "A",
-      "row": 4,
+      "row": 1,
       "col": 1
     },
     {
       "id": "not_1",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
+      "row": 3,
       "col": 1
     },
     {
       "id": "output_X",
       "type": "Output",
       "label": "Out",
-      "row": 0,
+      "row": 5,
       "col": 1
     }
   ],

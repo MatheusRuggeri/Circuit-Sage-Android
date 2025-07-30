@@ -123,25 +123,12 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
         setCurrentNodeDimensions({ width: dynamicNodeWidth, height: dynamicNodeHeight });
 
         nodes.forEach(node => {
-          // ==================== ALTERAÇÃO AQUI ====================
-          // Garante que as propriedades existem
           if (typeof node.row !== 'number' || typeof node.col !== 'number') return;
-          
-          // Validação para coordenadas 1-based
-          if (node.col > gridCols || node.row > gridRows || node.col < 1 || node.row < 1) return;
-
-          // Calcula a posição Y invertendo a 'row' e ajustando para 1-based.
-          // (gridRows - node.row) faz com que a row 1 fique na base.
-          const yPos = margin + (gridRows - node.row) * cellHeight + (cellHeight - dynamicNodeHeight) / 2;
-          
-          // Calcula a posição X ajustando para 1-based (node.col - 1).
-          const xPos = margin + (node.col - 1) * cellWidth + (cellWidth - dynamicNodeWidth) / 2;
-          
+          if (node.col >= gridCols || node.row >= gridRows || node.col < 0 || node.row < 0) return;
           positions[node.id] = {
-            x: xPos,
-            y: yPos,
+            x: margin + node.col * cellWidth + (cellWidth - dynamicNodeWidth) / 2,
+            y: margin + node.row * cellHeight + (cellHeight - dynamicNodeHeight) / 2,
           };
-          // ================= FIM DA ALTERAÇÃO ===================
         });
       }
     } else {

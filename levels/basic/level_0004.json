@@ -11,71 +11,71 @@
       "id": "input_1",
       "type": "Input",
       "label": "A",
-      "row": 4,
-      "col": 1
+      "row": 1,
+      "col": 2
     },
     {
       "id": "input_2",
       "type": "Input",
       "label": "B",
-      "row": 4,
-      "col": 2
+      "row": 1,
+      "col": 3
     },
     {
       "id": "not_1",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 0
+      "row": 3,
+      "col": 1
     },
     {
       "id": "not_2",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 1
+      "row": 3,
+      "col": 2
     },
     {
       "id": "not_3",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 2
+      "row": 3,
+      "col": 3
     },
     {
       "id": "not_4",
       "type": "NOT",
       "label": "NOT",
-      "row": 2,
-      "col": 3
+      "row": 3,
+      "col": 4
     },
     {
       "id": "output_1",
       "type": "Output",
       "label": "Out",
-      "row": 0,
-      "col": 0
+      "row": 5,
+      "col": 1
     },
     {
       "id": "output_2",
       "type": "Output",
       "label": "Out",
-      "row": 0,
-      "col": 1
+      "row": 5,
+      "col": 2
     },
     {
       "id": "output_3",
       "type": "Output",
       "label": "Out",
-      "row": 0,
-      "col": 2
+      "row": 5,
+      "col": 3
     },
     {
       "id": "output_4",
       "type": "Output",
       "label": "Out",
-      "row": 0,
-      "col": 3
+      "row": 5,
+      "col": 4
     }
   ],
   "connections": [
