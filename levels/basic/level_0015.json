@@ -1,0 +1,108 @@
+{
+  "levelId": "level_0015",
+  "levelName": "Level 15",
+  "levelDescription": "Now it is time to combine!",
+  "grid": {
+    "rows": 7,
+    "cols": 5
+  },
+  "nodes": [
+    {
+      "id": "input_1",
+      "type": "Input",
+      "label": "A",
+      "row": 6,
+      "col": 0
+    },
+    {
+      "id": "input_2",
+      "type": "Input",
+      "label": "B",
+      "row": 6,
+      "col": 2
+    },
+    {
+      "id": "input_3",
+      "type": "Input",
+      "label": "c",
+      "row": 6,
+      "col": 4
+    },
+    {
+      "id": "or_1",
+      "type": "OR",
+      "label": "OR",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "id": "and_1",
+      "type": "AND",
+      "label": "AND",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "id": "output_1",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "id": "output_2",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "id": "output_3",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 3
+    }
+  ],
+  "connections": [
+    {
+      "from": "input_1",
+      "to": "or_1"
+    },
+    {
+      "from": "input_2",
+      "to": "or_1"
+    },
+    {
+      "from": "input_2",
+      "to": "output_1"
+    },
+    {
+      "from": "input_3",
+      "to": "and_1"
+    },
+    {
+      "from": "or_1",
+      "to": "and_1"
+    },
+    {
+      "from": "and_1",
+      "to": "output_2"
+    }
+  ],
+  "initialInputs": {
+    "input_1": false,
+    "input_2": true,
+    "input_2": false
+  },
+  "targetOutputs": {
+    "output_1": false,
+    "output_2": true,
+    "output_3": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 2,
+    "oneStar": 6
+  }
+}

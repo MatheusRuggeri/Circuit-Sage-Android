@@ -1,0 +1,76 @@
+{
+  "levelId": "level_0013",
+  "levelName": "Level 13",
+  "levelDescription": "Now it is time to combine!",
+  "grid": {
+    "rows": 7,
+    "cols": 5
+  },
+  "nodes": [
+    {
+      "id": "input_1",
+      "type": "Input",
+      "label": "A",
+      "row": 6,
+      "col": 0
+    },
+    {
+      "id": "input_2",
+      "type": "Input",
+      "label": "B",
+      "row": 6,
+      "col": 2
+    },
+    {
+      "id": "not_1",
+      "type": "NOT",
+      "label": "NOT",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "id": "and_1",
+      "type": "AND",
+      "label": "AND",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "id": "output_1",
+      "type": "Output",
+      "label": "Out",
+      "row": 0,
+      "col": 0
+    }
+  ],
+  "connections": [
+    {
+      "from": "input_1",
+      "to": "not_1"
+    },
+    {
+      "from": "input_2",
+      "to": "and_1"
+    },	
+    {
+      "from": "not_1",
+      "to": "and_1"
+    },
+    {
+      "from": "and_1",
+      "to": "output_1"
+    }
+  ],
+  "initialInputs": {
+    "input_1": false,
+    "input_2": false
+  },
+  "targetOutputs": {
+    "output_1": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 2,
+    "oneStar": 6
+  }
+}
