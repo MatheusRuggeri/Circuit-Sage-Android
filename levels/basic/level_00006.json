@@ -1,0 +1,35 @@
+{
+  "levelId": "level_00006",
+  "levelName": "Level 6 - The NOT gate",
+  "levelDescription": "Let's add a NOT gate in the process",
+  "grid": {
+    "rows": 5,
+    "cols": 1
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+	
+    { "id": "not_1",	"type": "NOT", 		"label": "NOT", 	"row": 3, "col": 1 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 5, "col": 1 }
+  ],
+  "connections": [
+	{ "from": "input_1", 	"to": "not_1" },
+	
+	{ "from": "not_1", 	"to": "output_1" }
+  ],
+  "initialInputs": {
+    "input_1": true
+  },
+  "targetOutputs": {
+    "output_1": true
+  },
+  "starRatings": {
+    "threeStars": 1,
+    "twoStars": 2,
+    "oneStar": 3
+  },
+  "pop_up": {
+	"text": "This is the first node, a NOT gate!\nIt inverts the signal. If the input is TRUE, the output is FALSE;\n If(In = FALSE) Then OUT = TRUE"
+  }
+}

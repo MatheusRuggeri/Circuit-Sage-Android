@@ -1,0 +1,31 @@
+{
+  "levelId": "level_00001",
+  "levelName": "Level 1 - The Switch",
+  "levelDescription": "Let's start with the basics. Just press the Switch",
+  "grid": {
+    "rows": 3,
+    "cols": 1
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 3, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_1", 	"to": "output_1" }
+  ],
+  "initialInputs": {
+    "input_1": false
+  },
+  "targetOutputs": {
+    "output_1": true
+  },
+  "starRatings": {
+    "threeStars": 1,
+    "twoStars": 3,
+    "oneStar": 5
+  },
+  "pop_up": {
+	"text": "This is how you solve the challenges\nThe inputs with names A, B, C... can be pressed!\nTouch it and it will change its status!"
+  }
+}

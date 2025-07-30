@@ -1,0 +1,31 @@
+{
+  "levelId": "level_00002",
+  "levelName": "Level 2 - Turn it off",
+  "levelDescription": "Match the desided outputs",
+  "grid": {
+    "rows": 3,
+    "cols": 1
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 3, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_1", 	"to": "output_1" }
+  ],
+  "initialInputs": {
+    "input_1": true
+  },
+  "targetOutputs": {
+    "output_1": false
+  },
+  "starRatings": {
+    "threeStars": 1,
+    "twoStars": 3,
+    "oneStar": 5
+  },
+  "pop_up": {
+	"text": "Now you need to match the desided output\nGreen means ON, Gray means OFF\nTouch the inputs to make it match the output goal!"
+  }
+}

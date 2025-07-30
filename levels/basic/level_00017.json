@@ -1,0 +1,53 @@
+{
+  "levelId": "level_00017",
+  "levelName": "Level 17",
+  "levelDescription": "",
+  "grid": {
+    "rows": 7,
+    "cols": 5
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+    { "id": "input_2", 	"type": "Input", 	"label": "B", 		"row": 1, "col": 2 },
+    { "id": "input_3", 	"type": "Input", 	"label": "C", 		"row": 1, "col": 4 },
+    { "id": "input_4", 	"type": "Input", 	"label": "D", 		"row": 1, "col": 5 },
+	
+    { "id": "or_1",		"type": "OR", 		"label": "OR", 		"row": 3, "col": 1 },
+    { "id": "or_2",		"type": "OR", 		"label": "OR", 		"row": 3, "col": 5 },
+    { "id": "or_3",		"type": "OR", 		"label": "OR", 		"row": 5, "col": 2 },
+    { "id": "or_4",		"type": "OR", 		"label": "OR", 		"row": 5, "col": 4 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 7, "col": 2 },
+    { "id": "output_2", "type": "Output", 	"label": "Out", 	"row": 7, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_1", "to": "or_1" },
+    { "from": "input_2", "to": "or_1" },
+    { "from": "input_2", "to": "or_3" },
+    { "from": "input_3", "to": "or_2" },
+    { "from": "input_3", "to": "or_4" },
+    { "from": "input_4", "to": "or_2" },
+    { "from": "or_1", "to": "or_3" },
+    { "from": "or_2", "to": "or_4" },
+    { "from": "or_3", "to": "output_1" },
+    { "from": "or_4", "to": "output_2" }
+  ],
+  "initialInputs": {
+    "input_1": false,
+    "input_2": false,
+    "input_3": false,
+    "input_4": false
+  },
+  "targetOutputs": {
+    "output_1": true,
+    "output_2": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 2,
+    "oneStar": 6
+  },
+  "pop_up": {
+	"text": ""
+  }
+}

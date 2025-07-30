@@ -1,0 +1,41 @@
+{
+  "levelId": "level_00003",
+  "levelName": "Level 3 - Many Switches",
+  "levelDescription": "Match the desided outputs",
+  "grid": {
+    "rows": 3,
+    "cols": 3
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+    { "id": "input_2", 	"type": "Input", 	"label": "B", 		"row": 1, "col": 2 },
+    { "id": "input_3", 	"type": "Input", 	"label": "C", 		"row": 1, "col": 3 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 3, "col": 1 },
+    { "id": "output_2", "type": "Output",	"label": "Out", 	"row": 3, "col": 2 },
+    { "id": "output_3", "type": "Output", 	"label": "Out", 	"row": 3, "col": 3 }
+  ],
+  "connections": [
+    { "from": "input_1", 	"to": "output_1" },
+    { "from": "input_2", 	"to": "output_2" },
+    { "from": "input_3", 	"to": "output_3" }
+  ],
+  "initialInputs": {
+    "input_1": true,
+    "input_2": false,
+    "input_3": false
+  },
+  "targetOutputs": {
+    "output_1": false,
+    "output_2": true,
+    "output_3": false
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 4,
+    "oneStar": 8
+  },
+  "pop_up": {
+	"text": ""
+  }
+}

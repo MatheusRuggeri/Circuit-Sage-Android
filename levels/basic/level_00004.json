@@ -1,0 +1,42 @@
+{
+  "levelId": "level_00004",
+  "levelName": "Level 4 - Multiple Connections",
+  "levelDescription": "An element can be connected to more than one node",
+  "grid": {
+    "rows": 3,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 2 },
+    { "id": "input_2", 	"type": "Input", 	"label": "B", 		"row": 1, "col": 3 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 3, "col": 1 },
+    { "id": "output_2", "type": "Output",	"label": "Out", 	"row": 3, "col": 2 },
+    { "id": "output_3", "type": "Output", 	"label": "Out", 	"row": 3, "col": 3 },
+    { "id": "output_4", "type": "Output", 	"label": "Out", 	"row": 3, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_1", 	"to": "output_1" },
+    { "from": "input_1", 	"to": "output_3" },
+    { "from": "input_2", 	"to": "output_2" },
+    { "from": "input_2", 	"to": "output_4" }
+  ],
+  "initialInputs": {
+    "input_1": true,
+    "input_2": true
+  },
+  "targetOutputs": {
+    "output_1": true,
+    "output_2": false,
+    "output_3": true,
+    "output_4": false
+  },
+  "starRatings": {
+    "threeStars": 1,
+    "twoStars": 3,
+    "oneStar": 8
+  },
+  "pop_up": {
+	"text": ""
+  }
+}

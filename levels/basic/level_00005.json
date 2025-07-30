@@ -1,0 +1,62 @@
+{
+  "levelId": "level_00005",
+  "levelName": "Level 5 - Useless nodes",
+  "levelDescription": "Follow the wires, maybe you don't need to use one node",
+  "grid": {
+    "rows": 3,
+    "cols": 7
+  },
+  "nodes": [
+    { "id": "input_1", 	"type": "Input", 	"label": "A", 		"row": 1, "col": 1 },
+    { "id": "input_2", 	"type": "Input", 	"label": "B", 		"row": 1, "col": 2 },
+    { "id": "input_3", 	"type": "Input", 	"label": "C", 		"row": 1, "col": 3 },
+    { "id": "input_4", 	"type": "Input", 	"label": "D", 		"row": 1, "col": 4 },
+    { "id": "input_5", 	"type": "Input", 	"label": "E", 		"row": 1, "col": 5 },
+    { "id": "input_6", 	"type": "Input", 	"label": "F", 		"row": 1, "col": 6 },
+    { "id": "input_7", 	"type": "Input", 	"label": "G", 		"row": 1, "col": 7 },
+	
+    { "id": "output_1", "type": "Output", 	"label": "Out", 	"row": 3, "col": 1 },
+    { "id": "output_2", "type": "Output",	"label": "Out", 	"row": 3, "col": 2 },
+    { "id": "output_3", "type": "Output", 	"label": "Out", 	"row": 3, "col": 3 },
+    { "id": "output_4", "type": "Output", 	"label": "Out", 	"row": 3, "col": 4 },
+    { "id": "output_5", "type": "Output", 	"label": "Out", 	"row": 3, "col": 5 },
+    { "id": "output_6", "type": "Output", 	"label": "Out", 	"row": 3, "col": 6 },
+    { "id": "output_7", "type": "Output", 	"label": "Out", 	"row": 3, "col": 7 }
+  ],
+  "connections": [
+    { "from": "input_2", 	"to": "output_1" },
+    { "from": "input_2", 	"to": "output_3" },
+    { "from": "input_2", 	"to": "output_5" },
+    { "from": "input_2", 	"to": "output_7" },
+    { "from": "input_5", 	"to": "output_1" },
+    { "from": "input_5", 	"to": "output_2" },
+    { "from": "input_5", 	"to": "output_4" },
+    { "from": "input_5", 	"to": "output_6" }
+  ],
+  "initialInputs": {
+    "input_1": false,
+    "input_2": false,
+    "input_3": false,
+    "input_4": false,
+    "input_5": false,
+    "input_6": false,
+    "input_7": false
+  },
+  "targetOutputs": {
+    "output_1": true,
+    "output_2": true,
+    "output_3": true,
+    "output_4": true,
+    "output_5": true,
+    "output_6": true,
+    "output_7": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 4,
+    "oneStar": 8
+  },
+  "pop_up": {
+	"text": ""
+  }
+}
