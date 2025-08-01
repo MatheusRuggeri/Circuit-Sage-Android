@@ -1,0 +1,47 @@
+{
+  "levelId": "level_00024",
+  "levelName": "Nível 26 - Lei de De Morgan - Parte 2",
+  "levelDescription": "Explore a segunda parte da Lei de De Morgan. Uma porta NOR é o mesmo que uma porta AND com entradas invertidas.",
+  "grid": {
+    "rows": 9,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_1", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_2", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "or_1", "type": "OR", "label": "OR", "row": 3, "col": 1 },
+    { "id": "not_1", "type": "NOT", "label": "NOT", "row": 5, "col": 1 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 7, "col": 1 },
+    { "id": "not_2", "type": "NOT", "label": "NOT", "row": 3, "col": 3 },
+    { "id": "not_3", "type": "NOT", "label": "NOT", "row": 3, "col": 4 },
+    { "id": "and_1", "type": "AND", "label": "AND", "row": 5, "col": 4 },
+    { "id": "output_2", "type": "Output", "label": "Out", "row": 7, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_1", "to": "or_1" },
+    { "from": "input_2", "to": "or_1" },
+    { "from": "or_1", "to": "not_1" },
+    { "from": "not_1", "to": "output_1" },
+    { "from": "input_1", "to": "not_2" },
+    { "from": "input_2", "to": "not_3" },
+    { "from": "not_2", "to": "and_1" },
+    { "from": "not_3", "to": "and_1" },
+    { "from": "and_1", "to": "output_2" }
+  ],
+  "initialInputs": {
+    "input_1": true,
+    "input_2": false
+  },
+  "targetOutputs": {
+    "output_1": true,
+    "output_2": true
+  },
+  "starRatings": {
+    "threeStars": 2,
+    "twoStars": 3,
+    "oneStar": 4
+  },
+  "pop_up": {
+    "text": "Para que as duas saídas sejam verdadeiras, qual deve ser o estado das entradas A e B?"
+  }
+}

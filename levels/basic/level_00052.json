@@ -1,0 +1,28 @@
+{
+  "levelId": "level_00052",
+  "levelName": "Nível 56 - Somador com Transporte em Cascata de 4-Bits",
+  "levelDescription": "Construa um somador que some dois números de 4 bits (A e B) encadeando somadores completos.",
+  "grid": {
+    "rows": 10,
+    "cols": 9
+  },
+  "nodes": [
+    { "id": "input_A3", "type": "Input", "label": "A3", "row": 1, "col": 1 }, { "id": "input_A2", "type": "Input", "label": "A2", "row": 1, "col": 2 }, { "id": "input_A1", "type": "Input", "label": "A1", "row": 1, "col": 3 }, { "id": "input_A0", "type": "Input", "label": "A0", "row": 1, "col": 4 },
+    { "id": "input_B3", "type": "Input", "label": "B3", "row": 2, "col": 1 }, { "id": "input_B2", "type": "Input", "label": "B2", "row": 2, "col": 2 }, { "id": "input_B1", "type": "Input", "label": "B1", "row": 2, "col": 3 }, { "id": "input_B0", "type": "Input", "label": "B0", "row": 2, "col": 4 },
+    { "id": "fa0_xor1", "type": "XOR", "label": "XOR", "row": 4, "col": 4 }, { "id": "fa0_and1", "type": "AND", "label": "AND", "row": 5, "col": 4 }, { "id": "fa0_s", "type": "XOR", "label": "S0", "row": 6, "col": 4 }, { "id": "fa0_and2", "type": "AND", "label": "AND", "row": 7, "col": 4 }, { "id": "fa0_c", "type": "OR", "label": "C0", "row": 8, "col": 4 },
+    { "id": "fa1_xor1", "type": "XOR", "label": "XOR", "row": 4, "col": 3 }, { "id": "fa1_and1", "type": "AND", "label": "AND", "row": 5, "col": 3 }, { "id": "fa1_s", "type": "XOR", "label": "S1", "row": 6, "col": 3 }, { "id": "fa1_and2", "type": "AND", "label": "AND", "row": 7, "col": 3 }, { "id": "fa1_c", "type": "OR", "label": "C1", "row": 8, "col": 3 },
+    { "id": "fa2_xor1", "type": "XOR", "label": "XOR", "row": 4, "col": 2 }, { "id": "fa2_and1", "type": "AND", "label": "AND", "row": 5, "col": 2 }, { "id": "fa2_s", "type": "XOR", "label": "S2", "row": 6, "col": 2 }, { "id": "fa2_and2", "type": "AND", "label": "AND", "row": 7, "col": 2 }, { "id": "fa2_c", "type": "OR", "label": "C2", "row": 8, "col": 2 },
+    { "id": "fa3_xor1", "type": "XOR", "label": "XOR", "row": 4, "col": 1 }, { "id": "fa3_and1", "type": "AND", "label": "AND", "row": 5, "col": 1 }, { "id": "fa3_s", "type": "XOR", "label": "S3", "row": 6, "col": 1 }, { "id": "fa3_and2", "type": "AND", "label": "AND", "row": 7, "col": 1 }, { "id": "fa3_c", "type": "OR", "label": "Cout", "row": 8, "col": 1 },
+    { "id": "output_S3", "type": "Output", "label": "S3", "row": 9, "col": 6 }, { "id": "output_S2", "type": "Output", "label": "S2", "row": 9, "col": 7 }, { "id": "output_S1", "type": "Output", "label": "S1", "row": 9, "col": 8 }, { "id": "output_S0", "type": "Output", "label": "S0", "row": 9, "col": 9 }, { "id": "output_Cout", "type": "Output", "label": "Cout", "row": 8, "col": 6 }
+  ],
+  "connections": [
+    { "from": "input_A0", "to": "fa0_xor1" }, { "from": "input_B0", "to": "fa0_xor1" }, { "from": "input_A0", "to": "fa0_and1" }, { "from": "input_B0", "to": "fa0_and1" }, { "from": "fa0_xor1", "to": "fa0_s" }, { "from": "fa0_xor1", "to": "fa0_and2" }, { "from": "fa0_and1", "to": "fa0_c" }, { "from": "fa0_and2", "to": "fa0_c" }, { "from": "fa0_s", "to": "output_S0" },
+    { "from": "input_A1", "to": "fa1_xor1" }, { "from": "input_B1", "to": "fa1_xor1" }, { "from": "input_A1", "to": "fa1_and1" }, { "from": "input_B1", "to": "fa1_and1" }, { "from": "fa1_xor1", "to": "fa1_s" }, { "from": "fa1_xor1", "to": "fa1_and2" }, { "from": "fa1_and1", "to": "fa1_c" }, { "from": "fa1_and2", "to": "fa1_c" }, { "from": "fa1_s", "to": "output_S1" }, { "from": "fa0_c", "to": "fa1_s" }, { "from": "fa0_c", "to": "fa1_and2" },
+    { "from": "input_A2", "to": "fa2_xor1" }, { "from": "input_B2", "to": "fa2_xor1" }, { "from": "input_A2", "to": "fa2_and1" }, { "from": "input_B2", "to": "fa2_and1" }, { "from": "fa2_xor1", "to": "fa2_s" }, { "from": "fa2_xor1", "to": "fa2_and2" }, { "from": "fa2_and1", "to": "fa2_c" }, { "from": "fa2_and2", "to": "fa2_c" }, { "from": "fa2_s", "to": "output_S2" }, { "from": "fa1_c", "to": "fa2_s" }, { "from": "fa1_c", "to": "fa2_and2" },
+    { "from": "input_A3", "to": "fa3_xor1" }, { "from": "input_B3", "to": "fa3_xor1" }, { "from": "input_A3", "to": "fa3_and1" }, { "from": "input_B3", "to": "fa3_and1" }, { "from": "fa3_xor1", "to": "fa3_s" }, { "from": "fa3_xor1", "to": "fa3_and2" }, { "from": "fa3_and1", "to": "fa3_c" }, { "from": "fa3_and2", "to": "fa3_c" }, { "from": "fa3_s", "to": "output_S3" }, { "from": "fa2_c", "to": "fa3_s" }, { "from": "fa2_c", "to": "fa3_and2" },
+    { "from": "fa3_c", "to": "output_Cout" }
+  ],
+  "initialInputs": { "input_A3": false, "input_A2": false, "input_A1": false, "input_A0": false, "input_B3": false, "input_B2": false, "input_B1": false, "input_B0": false },
+  "targetOutputs": { "output_S3": true, "output_S2": false, "output_S1": false, "output_S0": true, "output_Cout": true },
+  "pop_up": { "text": "Some A=10 (1010) e B=15 (1111). A saída deve ser 25 (11001)." }
+}

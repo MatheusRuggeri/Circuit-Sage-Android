@@ -1,0 +1,29 @@
+{
+  "levelId": "level_00038",
+  "levelName": "Nível 43 - Latch com Gate",
+  "levelDescription": "Esta memória só funciona quando o pino 'E' (Enable) está ativado.",
+  "grid": {
+    "rows": 5,
+    "cols": 3
+  },
+  "nodes": [
+    { "id": "input_S", "type": "Input", "label": "S", "row": 1, "col": 1 },
+    { "id": "input_R", "type": "Input", "label": "R", "row": 1, "col": 3 },
+    { "id": "input_E", "type": "Input", "label": "E", "row": 2, "col": 2 },
+    { "id": "nand_S", "type": "NAND", "label": "NAND", "row": 3, "col": 1 },
+    { "id": "nand_R", "type": "NAND", "label": "NAND", "row": 3, "col": 3 },
+    { "id": "nand_Q", "type": "NAND", "label": "NAND", "row": 5, "col": 1 },
+    { "id": "nand_NQ", "type": "NAND", "label": "NAND", "row": 5, "col": 3 },
+    { "id": "output_Q", "type": "Output", "label": "Q", "row": 5, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_S", "to": "nand_S" }, { "from": "input_E", "to": "nand_S" },
+    { "from": "input_R", "to": "nand_R" }, { "from": "input_E", "to": "nand_R" },
+    { "from": "nand_S", "to": "nand_Q" }, { "from": "nand_NQ", "to": "nand_Q" },
+    { "from": "nand_R", "to": "nand_NQ" }, { "from": "nand_Q", "to": "nand_NQ" },
+    { "from": "nand_Q", "to": "output_Q" }
+  ],
+  "initialInputs": { "input_S": false, "input_R": true, "input_E": true },
+  "targetOutputs": { "output_Q": true },
+  "pop_up": { "text": "Com o 'Enable' ligado, use 'Set' (S=1, R=0) para ligar a saída. O estado se manterá mesmo se S voltar a 0." }
+}

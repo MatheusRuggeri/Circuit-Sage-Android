@@ -1,0 +1,39 @@
+{
+  "levelId": "level_00039",
+  "levelName": "Nível 44 - Grande Final de De Morgan",
+  "levelDescription": "O 'Vai-um' de um somador é um Voto de Maioria. Prove a equivalência!",
+  "grid": {
+    "rows": 9,
+    "cols": 5
+  },
+  "nodes": [
+    { "id": "input_A", "type": "Input", "label": "A", "row": 1, "col": 2 },
+    { "id": "input_B", "type": "Input", "label": "B", "row": 1, "col": 3 },
+    { "id": "input_Cin", "type": "Input", "label": "Cin", "row": 1, "col": 4 },
+    { "id": "xor_1", "type": "XOR", "label": "XOR", "row": 3, "col": 1 },
+    { "id": "and_1a", "type": "AND", "label": "AND", "row": 4, "col": 1 },
+    { "id": "and_1b", "type": "AND", "label": "AND", "row": 4, "col": 2 },
+    { "id": "or_1", "type": "OR", "label": "OR", "row": 6, "col": 1 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 8, "col": 1 },
+    { "id": "and_2a", "type": "AND", "label": "AND", "row": 3, "col": 4 },
+    { "id": "and_2b", "type": "AND", "label": "AND", "row": 3, "col": 5 },
+    { "id": "and_2c", "type": "AND", "label": "AND", "row": 4, "col": 4 },
+    { "id": "or_2", "type": "OR", "label": "OR", "row": 6, "col": 5 },
+    { "id": "output_2", "type": "Output", "label": "Out", "row": 8, "col": 5 }
+  ],
+  "connections": [
+    { "from": "input_A", "to": "xor_1" }, { "from": "input_B", "to": "xor_1" },
+    { "from": "xor_1", "to": "and_1a" }, { "from": "input_Cin", "to": "and_1a" },
+    { "from": "input_A", "to": "and_1b" }, { "from": "input_B", "to": "and_1b" },
+    { "from": "and_1a", "to": "or_1" }, { "from": "and_1b", "to": "or_1" },
+    { "from": "or_1", "to": "output_1" },
+    { "from": "input_A", "to": "and_2a" }, { "from": "input_B", "to": "and_2a" },
+    { "from": "input_A", "to": "and_2b" }, { "from": "input_Cin", "to": "and_2b" },
+    { "from": "input_B", "to": "and_2c" }, { "from": "input_Cin", "to": "and_2c" },
+    { "from": "and_2a", "to": "or_2" }, { "from": "and_2b", "to": "or_2" }, { "from": "and_2c", "to": "or_2" },
+    { "from": "or_2", "to": "output_2" }
+  ],
+  "initialInputs": { "input_A": true, "input_B": true, "input_Cin": false },
+  "targetOutputs": { "output_1": false, "output_2": false },
+  "pop_up": { "text": "Dois circuitos, mesma função. Para o resultado ser falso, a maioria das entradas (duas ou mais) deve ser falsa." }
+}

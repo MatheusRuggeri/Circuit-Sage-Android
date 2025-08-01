@@ -1,0 +1,35 @@
+{
+  "levelId": "level_00055",
+  "levelName": "Nível 59 - Latch SR com Gate",
+  "levelDescription": "Use 'S' para Setar (1) e 'R' para Resetar (0) a saída Q, apenas quando 'E' (Enable) estiver ativo. Cuidado com o estado proibido (S=1, R=1)!",
+  "grid": {
+    "rows": 8,
+    "cols": 3
+  },
+  "nodes": [
+    { "id": "input_S", "type": "Input", "label": "S", "row": 1, "col": 1 },
+    { "id": "input_R", "type": "Input", "label": "R", "row": 1, "col": 3 },
+    { "id": "input_E", "type": "Input", "label": "E", "row": 2, "col": 2 },
+    { "id": "nand_s_gate", "type": "NAND", "label": "NAND", "row": 4, "col": 1 },
+    { "id": "nand_r_gate", "type": "NAND", "label": "NAND", "row": 4, "col": 3 },
+    { "id": "nand_q", "type": "NAND", "label": "Q", "row": 6, "col": 1 },
+    { "id": "nand_nq", "type": "NAND", "label": "nQ", "row": 6, "col": 3 },
+    { "id": "output_Q", "type": "Output", "label": "Q", "row": 8, "col": 1 },
+    { "id": "output_nQ", "type": "Output", "label": "nQ", "row": 8, "col": 3 }
+  ],
+  "connections": [
+    { "from": "input_S", "to": "nand_s_gate" },
+    { "from": "input_E", "to": "nand_s_gate" },
+    { "from": "input_R", "to": "nand_r_gate" },
+    { "from": "input_E", "to": "nand_r_gate" },
+    { "from": "nand_s_gate", "to": "nand_q" },
+    { "from": "nand_nq", "to": "nand_q" },
+    { "from": "nand_r_gate", "to": "nand_nq" },
+    { "from": "nand_q", "to": "nand_nq" },
+    { "from": "nand_q", "to": "output_Q" },
+    { "from": "nand_nq", "to": "output_nQ" }
+  ],
+  "initialInputs": { "input_S": false, "input_R": false, "input_E": false },
+  "targetOutputs": { "output_Q": true, "output_nQ": false },
+  "pop_up": { "text": "Para gravar '1': 1) Ative E, 2) Ative S, 3) Desative E. A saída Q deve permanecer em '1' mesmo depois que S e E forem desativados." }
+}

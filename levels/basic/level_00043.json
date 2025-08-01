@@ -1,0 +1,30 @@
+{
+  "levelId": "level_00043",
+  "levelName": "Nível 47 - Latch Tipo D",
+  "levelDescription": "A base da memória. Armazene o valor de 'D' em 'Q' usando o pino 'Enable'.",
+  "grid": {
+    "rows": 7,
+    "cols": 3
+  },
+  "nodes": [
+    { "id": "input_D", "type": "Input", "label": "D", "row": 1, "col": 1 },
+    { "id": "input_E", "type": "Input", "label": "E", "row": 1, "col": 3 },
+    { "id": "not_D", "type": "NOT", "label": "NOT", "row": 2, "col": 1 },
+    { "id": "nand_S", "type": "NAND", "label": "NAND", "row": 4, "col": 1 },
+    { "id": "nand_R", "type": "NAND", "label": "NAND", "row": 4, "col": 3 },
+    { "id": "nand_Q", "type": "NAND", "label": "NAND", "row": 6, "col": 1 },
+    { "id": "nand_NQ", "type": "NAND", "label": "NAND", "row": 6, "col": 3 },
+    { "id": "output_Q", "type": "Output", "label": "Q", "row": 6, "col": 1 }
+  ],
+  "connections": [
+    { "from": "input_D", "to": "not_D" },
+    { "from": "input_D", "to": "nand_S" }, { "from": "input_E", "to": "nand_S" },
+    { "from": "not_D", "to": "nand_R" }, { "from": "input_E", "to": "nand_R" },
+    { "from": "nand_S", "to": "nand_Q" }, { "from": "nand_NQ", "to": "nand_Q" },
+    { "from": "nand_R", "to": "nand_NQ" }, { "from": "nand_Q", "to": "nand_NQ" },
+    { "from": "nand_Q", "to": "output_Q" }
+  ],
+  "initialInputs": { "input_D": false, "input_E": false },
+  "targetOutputs": { "output_Q": true },
+  "pop_up": { "text": "Para gravar um '1': 1) Ative E, 2) Coloque D em 'true', 3) Desative E. A saída 'Q' deve permanecer 'true'." }
+}

@@ -1,0 +1,51 @@
+{
+  "levelId": "level_00028",
+  "levelName": "Nível 31 - Apresentando o XOR",
+  "levelDescription": "O circuito da esquerda e a porta da direita são equivalentes. Bem-vindo ao OU Exclusivo (XOR)!",
+  "grid": {
+    "rows": 7,
+    "cols": 5
+  },
+  "nodes": [
+    { "id": "input_1", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_2", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "not_1", "type": "NOT", "label": "NOT", "row": 2, "col": 1 },
+    { "id": "not_2", "type": "NOT", "label": "NOT", "row": 2, "col": 2 },
+    { "id": "and_1", "type": "AND", "label": "AND", "row": 4, "col": 1 },
+    { "id": "and_2", "type": "AND", "label": "AND", "row": 4, "col": 2 },
+    { "id": "or_1", "type": "OR", "label": "OR", "row": 5, "col": 1 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 7, "col": 1 },
+    { "id": "xor_1", "type": "XOR", "label": "XOR", "row": 4, "col": 5 },
+    { "id": "output_2", "type": "Output", "label": "Out", "row": 7, "col": 5 }
+  ],
+  "connections": [
+    { "from": "input_1", "to": "not_1" },
+    { "from": "input_2", "to": "not_2" },
+    { "from": "input_1", "to": "and_1" },
+    { "from": "not_2", "to": "and_1" },
+    { "from": "not_1", "to": "and_2" },
+    { "from": "input_2", "to": "and_2" },
+    { "from": "and_1", "to": "or_1" },
+    { "from": "and_2", "to": "or_1" },
+    { "from": "or_1", "to": "output_1" },
+    { "from": "input_1", "to": "xor_1" },
+    { "from": "input_2", "to": "xor_1" },
+    { "from": "xor_1", "to": "output_2" }
+  ],
+  "initialInputs": {
+    "input_1": true,
+    "input_2": false
+  },
+  "targetOutputs": {
+    "output_1": false,
+    "output_2": false
+  },
+  "starRatings": {
+    "threeStars": 1,
+    "twoStars": 2,
+    "oneStar": 3
+  },
+  "pop_up": {
+    "text": "Uma porta XOR é verdadeira apenas quando suas entradas são diferentes. Para fazê-la ser falsa, as entradas devem ser iguais."
+  }
+}

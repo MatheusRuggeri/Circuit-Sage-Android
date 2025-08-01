@@ -1,0 +1,42 @@
+{
+  "levelId": "level_00056",
+  "levelName": "Nível 60 - Multiplicador de 2-Bits",
+  "levelDescription": "Multiplique dois números de 2 bits (A1A0 e B1B0) para produzir um resultado de 4 bits (P3P2P1P0).",
+  "grid": {
+    "rows": 10,
+    "cols": 5
+  },
+  "nodes": [
+    { "id": "input_A1", "type": "Input", "label": "A1", "row": 1, "col": 1 }, { "id": "input_A0", "type": "Input", "label": "A0", "row": 1, "col": 2 },
+    { "id": "input_B1", "type": "Input", "label": "B1", "row": 1, "col": 4 }, { "id": "input_B0", "type": "Input", "label": "B0", "row": 1, "col": 5 },
+    { "id": "and_p0", "type": "AND", "label": "P0", "row": 3, "col": 3 },
+    { "id": "and_p1a", "type": "AND", "label": "AND", "row": 4, "col": 1 },
+    { "id": "and_p1b", "type": "AND", "label": "AND", "row": 4, "col": 2 },
+    { "id": "ha1_s", "type": "XOR", "label": "P1", "row": 5, "col": 2 },
+    { "id": "ha1_c", "type": "AND", "label": "C1", "row": 5, "col": 1 },
+    { "id": "and_p2a", "type": "AND", "label": "AND", "row": 6, "col": 4 },
+    { "id": "ha2_s", "type": "XOR", "label": "P2", "row": 7, "col": 1 },
+    { "id": "ha2_c", "type": "AND", "label": "P3", "row": 7, "col": 4 },
+    { "id": "output_P3", "type": "Output", "label": "P3", "row": 9, "col": 1 },
+    { "id": "output_P2", "type": "Output", "label": "P2", "row": 9, "col": 2 },
+    { "id": "output_P1", "type": "Output", "label": "P1", "row": 9, "col": 3 },
+    { "id": "output_P0", "type": "Output", "label": "P0", "row": 9, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_A0", "to": "and_p0" }, { "from": "input_B0", "to": "and_p0" },
+    { "from": "input_A1", "to": "and_p1a" }, { "from": "input_B0", "to": "and_p1a" },
+    { "from": "input_A0", "to": "and_p1b" }, { "from": "input_B1", "to": "and_p1b" },
+    { "from": "and_p1a", "to": "ha1_s" }, { "from": "and_p1b", "to": "ha1_s" },
+    { "from": "and_p1a", "to": "ha1_c" }, { "from": "and_p1b", "to": "ha1_c" },
+    { "from": "input_A1", "to": "and_p2a" }, { "from": "input_B1", "to": "and_p2a" },
+    { "from": "ha1_c", "to": "ha2_s" }, { "from": "and_p2a", "to": "ha2_s" },
+    { "from": "ha1_c", "to": "ha2_c" }, { "from": "and_p2a", "to": "ha2_c" },
+    { "from": "ha2_c", "to": "output_P3" },
+    { "from": "ha2_s", "to": "output_P2" },
+    { "from": "ha1_s", "to": "output_P1" },
+    { "from": "and_p0", "to": "output_P0" }
+  ],
+  "initialInputs": { "input_A1": false, "input_A0": false, "input_B1": false, "input_B0": false },
+  "targetOutputs": { "output_P3": true, "output_P2": false, "output_P1": false, "output_P0": true },
+  "pop_up": { "text": "Multiplique 3 por 3 (A=11, B=11). O resultado deve ser 9 (1001)." }
+}

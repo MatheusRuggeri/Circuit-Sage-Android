@@ -1,0 +1,33 @@
+{
+  "levelId": "level_00037",
+  "levelName": "Nível 42 - ULA de 1-Bit",
+  "levelDescription": "Esta Unidade Lógica e Aritmética pode somar ou fazer uma operação E. O pino 'Op' escolhe a função.",
+  "grid": {
+    "rows": 7,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_A", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_B", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "input_Op", "type": "Input", "label": "Op", "row": 1, "col": 4 },
+    { "id": "and_res", "type": "AND", "label": "AND", "row": 3, "col": 1 },
+    { "id": "xor_res", "type": "XOR", "label": "XOR", "row": 3, "col": 2 },
+    { "id": "not_Op", "type": "NOT", "label": "NOT", "row": 2, "col": 4 },
+    { "id": "and_sel1", "type": "AND", "label": "AND", "row": 5, "col": 1 },
+    { "id": "and_sel2", "type": "AND", "label": "AND", "row": 5, "col": 2 },
+    { "id": "or_final", "type": "OR", "label": "OR", "row": 6, "col": 2 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 7, "col": 2 }
+  ],
+  "connections": [
+    { "from": "input_A", "to": "and_res" }, { "from": "input_B", "to": "and_res" },
+    { "from": "input_A", "to": "xor_res" }, { "from": "input_B", "to": "xor_res" },
+    { "from": "input_Op", "to": "not_Op" },
+    { "from": "and_res", "to": "and_sel1" }, { "from": "not_Op", "to": "and_sel1" },
+    { "from": "xor_res", "to": "and_sel2" }, { "from": "input_Op", "to": "and_sel2" },
+    { "from": "and_sel1", "to": "or_final" }, { "from": "and_sel2", "to": "or_final" },
+    { "from": "or_final", "to": "output_1" }
+  ],
+  "initialInputs": { "input_A": false, "input_B": false, "input_Op": false },
+  "targetOutputs": { "output_1": false },
+  "pop_up": { "text": "Op=0 seleciona A E B. Op=1 seleciona A+B (XOR). Calcule 1+1 e veja o resultado." }
+}

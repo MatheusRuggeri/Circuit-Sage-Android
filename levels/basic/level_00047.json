@@ -1,0 +1,42 @@
+{
+  "levelId": "level_00047",
+  "levelName": "Nível 52 - Half Adder com NAND",
+  "levelDescription": "Construa um half-adder (soma binária de dois bits) usando apenas portas NAND. A saída deve ser a soma e o carry.",
+  "grid": {
+    "rows": 10,
+    "cols": 8
+  },
+  "nodes": [
+    { "id": "input_A", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_B", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "nand1", "type": "NAND", "label": "NAND1", "row": 3, "col": 1 },
+    { "id": "nand2", "type": "NAND", "label": "NAND2", "row": 3, "col": 2 },
+    { "id": "nand3", "type": "NAND", "label": "NAND3", "row": 4, "col": 1 },
+    { "id": "nand4", "type": "NAND", "label": "NAND4", "row": 5, "col": 1 },
+    { "id": "nand5", "type": "NAND", "label": "NAND5", "row": 6, "col": 1 },
+    { "id": "output_Sum", "type": "Output", "label": "Sum", "row": 8, "col": 1 },
+    { "id": "output_Carry", "type": "Output", "label": "Carry", "row": 8, "col": 2 }
+  ],
+  "connections": [
+    { "from": "input_A", "to": "nand1" },
+    { "from": "input_B", "to": "nand1" },
+    { "from": "input_A", "to": "nand2" },
+    { "from": "input_B", "to": "nand2" },
+    { "from": "nand1", "to": "nand3" },
+    { "from": "nand2", "to": "nand3" },
+    { "from": "nand1", "to": "nand4" },
+    { "from": "input_B", "to": "nand4" },
+    { "from": "nand2", "to": "nand5" },
+    { "from": "input_A", "to": "nand5" },
+    { "from": "nand3", "to": "output_Sum" },
+    { "from": "nand4", "to": "output_Carry" }
+  ],
+  "initialInputs": {
+    "input_A": false,
+    "input_B": false
+  },
+  "targetOutputs": {
+    "output_Sum": false,
+    "output_Carry": false
+  }
+}

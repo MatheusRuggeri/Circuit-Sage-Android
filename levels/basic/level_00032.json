@@ -1,0 +1,40 @@
+{
+  "levelId": "level_00032",
+  "levelName": "Nível 37 - Verificador de Igualdade",
+  "levelDescription": "Use portas XNOR para verificar se dois números de 2 bits (AB e CD) são idênticos.",
+  "grid": {
+    "rows": 5,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_A", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_B", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "input_C", "type": "Input", "label": "C", "row": 1, "col": 3 },
+    { "id": "input_D", "type": "Input", "label": "D", "row": 1, "col": 4 },
+    { "id": "xnor_1", "type": "XNOR", "label": "XNOR", "row": 3, "col": 1 },
+    { "id": "xnor_2", "type": "XNOR", "label": "XNOR", "row": 3, "col": 4 },
+    { "id": "and_1", "type": "AND", "label": "AND", "row": 4, "col": 2 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 5, "col": 2 }
+  ],
+  "connections": [
+    { "from": "input_A", "to": "xnor_1" },
+    { "from": "input_C", "to": "xnor_1" },
+    { "from": "input_B", "to": "xnor_2" },
+    { "from": "input_D", "to": "xnor_2" },
+    { "from": "xnor_1", "to": "and_1" },
+    { "from": "xnor_2", "to": "and_1" },
+    { "from": "and_1", "to": "output_1" }
+  ],
+  "initialInputs": {
+    "input_A": true,
+    "input_B": false,
+    "input_C": false,
+    "input_D": true
+  },
+  "targetOutputs": {
+    "output_1": true
+  },
+  "pop_up": {
+    "text": "A saída só será verdadeira se A=C E B=D. Faça os números AB e CD serem iguais."
+  }
+}

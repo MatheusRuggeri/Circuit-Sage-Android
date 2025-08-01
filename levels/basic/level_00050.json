@@ -1,0 +1,39 @@
+{
+  "levelId": "level_00050",
+  "levelName": "Nível 54 - Decodificador 2-para-4 com Habilitação",
+  "levelDescription": "Use as entradas de seleção (S1, S0) para ativar uma das quatro saídas. A entrada 'E' (Enable) deve ser verdadeira para que qualquer saída seja ativada.",
+  "grid": {
+    "rows": 9,
+    "cols": 5
+  },
+  "nodes": [
+    { "id": "input_S1", "type": "Input", "label": "S1", "row": 1, "col": 2 },
+    { "id": "input_S0", "type": "Input", "label": "S0", "row": 1, "col": 3 },
+    { "id": "input_E", "type": "Input", "label": "E", "row": 1, "col": 5 },
+    { "id": "not_S1", "type": "NOT", "label": "NOT", "row": 2, "col": 2 },
+    { "id": "not_S0", "type": "NOT", "label": "NOT", "row": 2, "col": 3 },
+    { "id": "and_0", "type": "AND", "label": "AND", "row": 5, "col": 1 },
+    { "id": "and_1", "type": "AND", "label": "AND", "row": 5, "col": 2 },
+    { "id": "and_2", "type": "AND", "label": "AND", "row": 5, "col": 3 },
+    { "id": "and_3", "type": "AND", "label": "AND", "row": 5, "col": 4 },
+    { "id": "output_0", "type": "Output", "label": "Y0", "row": 7, "col": 1 },
+    { "id": "output_1", "type": "Output", "label": "Y1", "row": 7, "col": 2 },
+    { "id": "output_2", "type": "Output", "label": "Y2", "row": 7, "col": 3 },
+    { "id": "output_3", "type": "Output", "label": "Y3", "row": 7, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_S1", "to": "not_S1" },
+    { "from": "input_S0", "to": "not_S0" },
+    { "from": "not_S1", "to": "and_0" }, { "from": "not_S0", "to": "and_0" }, { "from": "input_E", "to": "and_0" },
+    { "from": "not_S1", "to": "and_1" }, { "from": "input_S0", "to": "and_1" }, { "from": "input_E", "to": "and_1" },
+    { "from": "input_S1", "to": "and_2" }, { "from": "not_S0", "to": "and_2" }, { "from": "input_E", "to": "and_2" },
+    { "from": "input_S1", "to": "and_3" }, { "from": "input_S0", "to": "and_3" }, { "from": "input_E", "to": "and_3" },
+    { "from": "and_0", "to": "output_0" },
+    { "from": "and_1", "to": "output_1" },
+    { "from": "and_2", "to": "output_2" },
+    { "from": "and_3", "to": "output_3" }
+  ],
+  "initialInputs": { "input_S1": false, "input_S0": false, "input_E": false },
+  "targetOutputs": { "output_0": false, "output_1": false, "output_2": true, "output_3": false },
+  "pop_up": { "text": "Habilite o circuito e selecione o endereço para ativar a saída Y2 (S1=1, S0=0)." }
+}

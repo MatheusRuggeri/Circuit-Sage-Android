@@ -1,0 +1,59 @@
+{
+  "levelId": "level_00053",
+  "levelName": "Nível 57 - ULA de 1-Bit",
+  "levelDescription": "Crie uma ULA de 1-bit. A seleção 'OP' escolhe a operação: 00=A+B, 01=A AND B, 10=A OR B, 11=NOT A.",
+  "grid": {
+    "rows": 12,
+    "cols": 7
+  },
+  "nodes": [
+    { "id": "input_A", "type": "Input", "label": "A", "row": 1, "col": 1 },
+    { "id": "input_B", "type": "Input", "label": "B", "row": 1, "col": 2 },
+    { "id": "input_Cin", "type": "Input", "label": "Cin", "row": 1, "col": 3 },
+    { "id": "input_OP1", "type": "Input", "label": "OP1", "row": 1, "col": 6 },
+    { "id": "input_OP0", "type": "Input", "label": "OP0", "row": 1, "col": 7 },
+
+    { "id": "op_add_s", "type": "XOR", "label": "Soma", "row": 3, "col": 1 },
+    { "id": "op_add_c", "type": "OR", "label": "Cout", "row": 4, "col": 2 },
+    { "id": "op_add_p1", "type": "XOR", "label": "XOR", "row": 3, "col": 2 },
+    { "id": "op_add_p2", "type": "AND", "label": "AND", "row": 3, "col": 3 },
+    { "id": "op_add_p3", "type": "AND", "label": "AND", "row": 4, "col": 3 },
+
+    { "id": "op_and", "type": "AND", "label": "AND", "row": 5, "col": 4 },
+    { "id": "op_or", "type": "OR", "label": "OR", "row": 5, "col": 5 },
+    { "id": "op_not", "type": "NOT", "label": "NOT", "row": 5, "col": 6 },
+    
+    { "id": "mux_sel0", "type": "AND", "label": "AND", "row": 8, "col": 1 },
+    { "id": "mux_sel1", "type": "AND", "label": "AND", "row": 8, "col": 2 },
+    { "id": "mux_sel2", "type": "AND", "label": "AND", "row": 8, "col": 3 },
+    { "id": "mux_sel3", "type": "AND", "label": "AND", "row": 8, "col": 4 },
+    { "id": "mux_nOP1", "type": "NOT", "label": "NOT", "row": 2, "col": 6 },
+    { "id": "mux_nOP0", "type": "NOT", "label": "NOT", "row": 2, "col": 7 },
+    { "id": "mux_d0", "type": "AND", "label": "AND", "row": 7, "col": 1 }, { "id": "mux_d1", "type": "AND", "label": "AND", "row": 7, "col": 2 }, { "id": "mux_d2", "type": "AND", "label": "AND", "row": 7, "col": 3 }, { "id": "mux_d3", "type": "AND", "label": "AND", "row": 7, "col": 4 },
+    
+    { "id": "final_or", "type": "OR", "label": "OR", "row": 10, "col": 3 },
+    { "id": "output_Res", "type": "Output", "label": "Res", "row": 12, "col": 3 },
+    { "id": "output_Cout", "type": "Output", "label": "Cout", "row": 12, "col": 2 }
+  ],
+  "connections": [
+    { "from": "input_A", "to": "op_add_p1" }, { "from": "input_B", "to": "op_add_p1" }, { "from": "op_add_p1", "to": "op_add_s" }, { "from": "input_Cin", "to": "op_add_s" },
+    { "from": "input_A", "to": "op_add_p2" }, { "from": "input_B", "to": "op_add_p2" }, { "from": "op_add_p1", "to": "op_add_p3" }, { "from": "input_Cin", "to": "op_add_p3" },
+    { "from": "op_add_p2", "to": "op_add_c" }, { "from": "op_add_p3", "to": "op_add_c" },
+    { "from": "input_A", "to": "op_and" }, { "from": "input_B", "to": "op_and" }, { "from": "input_A", "to": "op_or" }, { "from": "input_B", "to": "op_or" }, { "from": "input_A", "to": "op_not" },
+    { "from": "input_OP1", "to": "mux_nOP1" }, { "from": "input_OP0", "to": "mux_nOP0" },
+    { "from": "mux_nOP1", "to": "mux_d0" }, { "from": "mux_nOP0", "to": "mux_d0" },
+    { "from": "mux_nOP1", "to": "mux_d1" }, { "from": "input_OP0", "to": "mux_d1" },
+    { "from": "input_OP1", "to": "mux_d2" }, { "from": "mux_nOP0", "to": "mux_d2" },
+    { "from": "input_OP1", "to": "mux_d3" }, { "from": "input_OP0", "to": "mux_d3" },
+    { "from": "op_add_s", "to": "mux_sel0" }, { "from": "mux_d0", "to": "mux_sel0" },
+    { "from": "op_and", "to": "mux_sel1" }, { "from": "mux_d1", "to": "mux_sel1" },
+    { "from": "op_or", "to": "mux_sel2" }, { "from": "mux_d2", "to": "mux_sel2" },
+    { "from": "op_not", "to": "mux_sel3" }, { "from": "mux_d3", "to": "mux_sel3" },
+    { "from": "mux_sel0", "to": "final_or" }, { "from": "mux_sel1", "to": "final_or" }, { "from": "mux_sel2", "to": "final_or" }, { "from": "mux_sel3", "to": "final_or" },
+    { "from": "final_or", "to": "output_Res" },
+    { "from": "op_add_c", "to": "output_Cout" }
+  ],
+  "initialInputs": { "input_A": false, "input_B": false, "input_Cin": false, "input_OP1": false, "input_OP0": false },
+  "targetOutputs": { "output_Res": true, "output_Cout": false },
+  "pop_up": { "text": "Selecione a operação OR (OP=10) com as entradas A=1, B=0. A saída Res deve ser 1." }
+}

@@ -1,0 +1,63 @@
+{
+  "levelId": "level_00046",
+  "levelName": "Nível 51 - Batalha de Somas",
+  "levelDescription": "A saída é 'verdadeira' se a contagem de entradas ativas à direita for maior que a da esquerda.",
+  "grid": {
+    "rows": 13,
+    "cols": 7
+  },
+  "nodes": [
+    { "id": "L2", "type": "Input", "label": "L2", "row": 1, "col": 1 },
+    { "id": "L1", "type": "Input", "label": "L1", "row": 1, "col": 2 },
+    { "id": "L0", "type": "Input", "label": "L0", "row": 1, "col": 3 },
+    { "id": "R2", "type": "Input", "label": "R2", "row": 1, "col": 5 },
+    { "id": "R1", "type": "Input", "label": "R1", "row": 1, "col": 6 },
+    { "id": "R0", "type": "Input", "label": "R0", "row": 1, "col": 7 },
+
+    { "id": "L_xor1", "type": "XOR", "label": "XOR", "row": 3, "col": 1 },
+    { "id": "L_and1", "type": "AND", "label": "AND", "row": 3, "col": 2 },
+    { "id": "L_and2", "type": "AND", "label": "AND", "row": 3, "col": 3 },
+    { "id": "L_Sum0", "type": "XOR", "label": "CL0", "row": 4, "col": 1 },
+    { "id": "L_Sum1", "type": "OR", "label": "CL1", "row": 4, "col": 3 },
+    
+    { "id": "R_xor1", "type": "XOR", "label": "XOR", "row": 3, "col": 5 },
+    { "id": "R_and1", "type": "AND", "label": "AND", "row": 3, "col": 6 },
+    { "id": "R_and2", "type": "AND", "label": "AND", "row": 3, "col": 7 },
+    { "id": "R_Sum0", "type": "XOR", "label": "CR0", "row": 4, "col": 5 },
+    { "id": "R_Sum1", "type": "OR", "label": "CR1", "row": 4, "col": 7 },
+
+    { "id": "C_not_L1", "type": "NOT", "label": "NOT", "row": 7, "col": 2 },
+    { "id": "C_gt_part1", "type": "AND", "label": "AND", "row": 8, "col": 2 },
+    { "id": "C_eq_part1", "type": "XNOR", "label": "XNOR", "row": 8, "col": 4 },
+    { "id": "C_not_L0", "type": "NOT", "label": "NOT", "row": 7, "col": 5 },
+    { "id": "C_gt_part2", "type": "AND", "label": "AND", "row": 8, "col": 5 },
+    { "id": "C_eq_final", "type": "AND", "label": "AND", "row": 9, "col": 4 },
+    { "id": "C_final_or", "type": "OR", "label": "OR", "row": 11, "col": 4 },
+    { "id": "output", "type": "Output", "label": "Out", "row": 13, "col": 4 }
+  ],
+  "connections": [
+    { "from": "L2", "to": "L_xor1" }, { "from": "L1", "to": "L_xor1" },
+    { "from": "L_xor1", "to": "L_Sum0" }, { "from": "L0", "to": "L_Sum0" },
+    { "from": "L1", "to": "L_and1" }, { "from": "L0", "to": "L_and1" },
+    { "from": "L_xor1", "to": "L_and2" }, { "from": "L0", "to": "L_and2" },
+    { "from": "L_and1", "to": "L_Sum1" }, { "from": "L_and2", "to": "L_Sum1" },
+    
+    { "from": "R2", "to": "R_xor1" }, { "from": "R1", "to": "R_xor1" },
+    { "from": "R_xor1", "to": "R_Sum0" }, { "from": "R0", "to": "R_Sum0" },
+    { "from": "R1", "to": "R_and1" }, { "from": "R0", "to": "R_and1" },
+    { "from": "R_xor1", "to": "R_and2" }, { "from": "R0", "to": "R_and2" },
+    { "from": "R_and1", "to": "R_Sum1" }, { "from": "R_and2", "to": "R_Sum1" },
+    
+    { "from": "L_Sum1", "to": "C_not_L1" }, { "from": "R_Sum1", "to": "C_gt_part1" }, { "from": "C_not_L1", "to": "C_gt_part1" },
+    { "from": "R_Sum1", "to": "C_eq_part1" }, { "from": "L_Sum1", "to": "C_eq_part1" },
+    { "from": "L_Sum0", "to": "C_not_L0" }, { "from": "R_Sum0", "to": "C_gt_part2" }, { "from": "C_not_L0", "to": "C_gt_part2" },
+    { "from": "C_eq_part1", "to": "C_eq_final" }, { "from": "C_gt_part2", "to": "C_eq_final" },
+    
+    { "from": "C_gt_part1", "to": "C_final_or" }, { "from": "C_eq_final", "to": "C_final_or" },
+    { "from": "C_final_or", "to": "output" }
+  ],
+  "initialInputs": { "L2": false, "L1": false, "L0": false, "R2": false, "R1": false, "R0": false },
+  "targetOutputs": { "output": true },
+  "starRatings": { "threeStars": 1, "twoStars": 2, "oneStar": 3 },
+  "pop_up": { "text": "A saída será verdadeira apenas se a contagem de 'trues' à direita for maior que a contagem de 'trues' à esquerda." }
+}

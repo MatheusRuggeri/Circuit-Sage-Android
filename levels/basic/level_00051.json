@@ -1,0 +1,45 @@
+{
+  "levelId": "level_00051",
+  "levelName": "Nível 55 - Comparador de 2-Bits",
+  "levelDescription": "Compare dois números de 2 bits (A e B) e determine se A > B, A = B, ou A < B.",
+  "grid": {
+    "rows": 12,
+    "cols": 7
+  },
+  "nodes": [
+    { "id": "input_A1", "type": "Input", "label": "A1", "row": 1, "col": 1 },
+    { "id": "input_A0", "type": "Input", "label": "A0", "row": 1, "col": 2 },
+    { "id": "input_B1", "type": "Input", "label": "B1", "row": 1, "col": 5 },
+    { "id": "input_B0", "type": "Input", "label": "B0", "row": 1, "col": 6 },
+    { "id": "xnor_eq1", "type": "XNOR", "label": "XNOR", "row": 3, "col": 1 },
+    { "id": "xnor_eq0", "type": "XNOR", "label": "XNOR", "row": 3, "col": 2 },
+    { "id": "not_b1", "type": "NOT", "label": "NOT", "row": 3, "col": 5 },
+    { "id": "not_b0", "type": "NOT", "label": "NOT", "row": 3, "col": 6 },
+    { "id": "and_eq", "type": "AND", "label": "AND", "row": 5, "col": 3 },
+    { "id": "and_gt1", "type": "AND", "label": "AND", "row": 7, "col": 2 },
+    { "id": "and_gt0", "type": "AND", "label": "AND", "row": 7, "col": 4 },
+    { "id": "or_gt", "type": "OR", "label": "OR", "row": 8, "col": 3 },
+    { "id": "or_lt_gt", "type": "OR", "label": "OR", "row": 9, "col": 5 },
+    { "id": "not_lt", "type": "NOT", "label": "NOT", "row": 10, "col": 5 },
+    { "id": "output_AgtB", "type": "Output", "label": "A>B", "row": 11, "col": 2 },
+    { "id": "output_AeqB", "type": "Output", "label": "A=B", "row": 11, "col": 3 },
+    { "id": "output_AltB", "type": "Output", "label": "A<B", "row": 11, "col": 5 }
+  ],
+  "connections": [
+    { "from": "input_A1", "to": "xnor_eq1" }, { "from": "input_B1", "to": "xnor_eq1" },
+    { "from": "input_A0", "to": "xnor_eq0" }, { "from": "input_B0", "to": "xnor_eq0" },
+    { "from": "input_B1", "to": "not_b1" }, { "from": "input_B0", "to": "not_b0" },
+    { "from": "xnor_eq1", "to": "and_eq" }, { "from": "xnor_eq0", "to": "and_eq" },
+    { "from": "input_A1", "to": "and_gt1" }, { "from": "not_b1", "to": "and_gt1" },
+    { "from": "xnor_eq1", "to": "and_gt0" }, { "from": "input_A0", "to": "and_gt0" }, { "from": "not_b0", "to": "and_gt0" },
+    { "from": "and_gt1", "to": "or_gt" }, { "from": "and_gt0", "to": "or_gt" },
+    { "from": "or_gt", "to": "or_lt_gt" }, { "from": "and_eq", "to": "or_lt_gt" },
+    { "from": "or_lt_gt", "to": "not_lt" },
+    { "from": "or_gt", "to": "output_AgtB" },
+    { "from": "and_eq", "to": "output_AeqB" },
+    { "from": "not_lt", "to": "output_AltB" }
+  ],
+  "initialInputs": { "input_A1": false, "input_A0": false, "input_B1": false, "input_B0": false },
+  "targetOutputs": { "output_AgtB": true, "output_AeqB": false, "output_AltB": false },
+  "pop_up": { "text": "Faça A ser maior que B. Por exemplo, A=2 (10) e B=1 (01)." }
+}

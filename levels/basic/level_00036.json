@@ -1,0 +1,41 @@
+{
+  "levelId": "level_00036",
+  "levelName": "Nível 41 - MUX 4-para-1",
+  "levelDescription": "Use os seletores S1 e S0 para escolher qual entrada de dados (I0-I3) vai para a saída.",
+  "grid": {
+    "rows": 9,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_I0", "type": "Input", "label": "I0", "row": 1, "col": 1 },
+    { "id": "input_I1", "type": "Input", "label": "I1", "row": 1, "col": 2 },
+    { "id": "input_I2", "type": "Input", "label": "I2", "row": 1, "col": 3 },
+    { "id": "input_I3", "type": "Input", "label": "I3", "row": 1, "col": 4 },
+    { "id": "input_S1", "type": "Input", "label": "S1", "row": 3, "col": 1 },
+    { "id": "input_S0", "type": "Input", "label": "S0", "row": 3, "col": 2 },
+    { "id": "not_S1", "type": "NOT", "label": "NOT", "row": 4, "col": 1 },
+    { "id": "not_S0", "type": "NOT", "label": "NOT", "row": 4, "col": 2 },
+    { "id": "and_0", "type": "AND", "label": "AND", "row": 6, "col": 1 },
+    { "id": "and_1", "type": "AND", "label": "AND", "row": 6, "col": 2 },
+    { "id": "and_2", "type": "AND", "label": "AND", "row": 6, "col": 3 },
+    { "id": "and_3", "type": "AND", "label": "AND", "row": 6, "col": 4 },
+    { "id": "or_1", "type": "OR", "label": "OR", "row": 8, "col": 2 },
+    { "id": "or_2", "type": "OR", "label": "OR", "row": 8, "col": 3 },
+    { "id": "or_final", "type": "OR", "label": "OR", "row": 9, "col": 2 },
+    { "id": "output_1", "type": "Output", "label": "Out", "row": 9, "col": 3 }
+  ],
+  "connections": [
+    { "from": "input_S1", "to": "not_S1" },
+    { "from": "input_S0", "to": "not_S0" },
+    { "from": "input_I0", "to": "and_0" }, { "from": "not_S1", "to": "and_0" }, { "from": "not_S0", "to": "and_0" },
+    { "from": "input_I1", "to": "and_1" }, { "from": "not_S1", "to": "and_1" }, { "from": "input_S0", "to": "and_1" },
+    { "from": "input_I2", "to": "and_2" }, { "from": "input_S1", "to": "and_2" }, { "from": "not_S0", "to": "and_2" },
+    { "from": "input_I3", "to": "and_3" }, { "from": "input_S1", "to": "and_3" }, { "from": "input_S0", "to": "and_3" },
+    { "from": "and_0", "to": "or_1" }, { "from": "and_1", "to": "or_1" },
+    { "from": "and_2", "to": "or_2" }, { "from": "and_3", "to": "or_2" },
+    { "from": "or_1", "to": "or_final" }, { "from": "or_2", "to": "or_final" }, { "from": "or_final", "to": "output_1" }
+  ],
+  "initialInputs": { "input_I0": true, "input_I1": false, "input_I2": true, "input_I3": false, "input_S1": false, "input_S0": false },
+  "targetOutputs": { "output_1": false },
+  "pop_up": { "text": "As entradas de dados são 1010. Selecione uma das saídas falsas (I1 ou I3) usando os bits S1 e S0." }
+}

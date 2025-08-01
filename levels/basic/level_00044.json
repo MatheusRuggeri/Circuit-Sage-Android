@@ -1,0 +1,36 @@
+{
+  "levelId": "level_00044",
+  "levelName": "Nível 48 - Rotator de 2-Bits",
+  "levelDescription": "Rotacione os bits de entrada. Se ROT=1, A1 e A0 trocam de lugar na saída.",
+  "grid": {
+    "rows": 7,
+    "cols": 4
+  },
+  "nodes": [
+    { "id": "input_A1", "type": "Input", "label": "A1", "row": 1, "col": 1 },
+    { "id": "input_A0", "type": "Input", "label": "A0", "row": 1, "col": 2 },
+    { "id": "input_ROT", "type": "Input", "label": "ROT", "row": 1, "col": 4 },
+    { "id": "not_ROT", "type": "NOT", "label": "NOT", "row": 2, "col": 4 },
+    { "id": "and_O1a", "type": "AND", "label": "AND", "row": 4, "col": 1 },
+    { "id": "and_O1b", "type": "AND", "label": "AND", "row": 4, "col": 2 },
+    { "id": "or_O1", "type": "OR", "label": "OR", "row": 5, "col": 1 },
+    { "id": "and_O0a", "type": "AND", "label": "AND", "row": 4, "col": 3 },
+    { "id": "and_O0b", "type": "AND", "label": "AND", "row": 4, "col": 4 },
+    { "id": "or_O0", "type": "OR", "label": "OR", "row": 5, "col": 4 },
+    { "id": "output_O1", "type": "Output", "label": "O1", "row": 7, "col": 1 },
+    { "id": "output_O0", "type": "Output", "label": "O0", "row": 7, "col": 4 }
+  ],
+  "connections": [
+    { "from": "input_ROT", "to": "not_ROT" },
+    { "from": "input_A1", "to": "and_O1a" }, { "from": "not_ROT", "to": "and_O1a" },
+    { "from": "input_A0", "to": "and_O1b" }, { "from": "input_ROT", "to": "and_O1b" },
+    { "from": "and_O1a", "to": "or_O1" }, { "from": "and_O1b", "to": "or_O1" },
+    { "from": "input_A0", "to": "and_O0a" }, { "from": "not_ROT", "to": "and_O0a" },
+    { "from": "input_A1", "to": "and_O0b" }, { "from": "input_ROT", "to": "and_O0b" },
+    { "from": "and_O0a", "to": "or_O0" }, { "from": "and_O0b", "to": "or_O0" },
+    { "from": "or_O1", "to": "output_O1" }, { "from": "or_O0", "to": "output_O0" }
+  ],
+  "initialInputs": { "input_A1": true, "input_A0": false, "input_ROT": false },
+  "targetOutputs": { "output_O1": false, "output_O0": true },
+  "pop_up": { "text": "A entrada é '10'. Ative a rotação para que a saída se torne '01'." }
+}
