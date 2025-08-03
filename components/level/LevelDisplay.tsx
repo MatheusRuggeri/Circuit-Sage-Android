@@ -50,6 +50,11 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
   const [isCompletionModalOpen, setIsCompletionModalOpen] = useState(false);
   const [starsEarnedInModal, setStarsEarnedInModal] = useState(0);
 
+
+  // ====== NOVO ESTADO PARA O POP-UP INFORMATIVO ======
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  // ====================================================
+
   // This function replaces the ref-based size update.
   // It's called by the `onLayout` prop of the game area View.
   const onLayout = (event: any) => {
@@ -84,6 +89,13 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
     setMoveCount(0);
     setIsCompletedThisAttempt(false);
     setIsCompletionModalOpen(false);
+	
+    // ====== LÓGICA PARA EXIBIR O POP-UP INFORMATIVO ======
+    // Verifica se o objeto pop_up existe e se o texto não está vazio
+    if (level.pop_up && level.pop_up.text && level.pop_up.text.trim() !== '') {
+      setIsInfoModalOpen(true); // Abre o modal se houver texto
+    }
+    // ========================================================
   }, [level]);
 
   // The core logic for positioning nodes remains identical,
@@ -281,6 +293,11 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
     handleModalClose();
     onBackToLevels();
   };
+  
+  // ====== FUNÇÃO PARA FECHAR O NOVO MODAL ======
+  const handleInfoModalClose = () => setIsInfoModalOpen(false);
+  // ===============================================
+
 
   const allNodes = useMemo(() => Object.values(simulatedNodes), [simulatedNodes]);
   const visibleNodes = allNodes.filter(node => nodePositions[node.id] && canvasSize.width > 0 && canvasSize.height > 0);
@@ -351,6 +368,27 @@ const LevelDisplay: React.FC<LevelDisplayProps> = ({
           )}
         </View>
         
+        {/* 1. MODAL DE INÍCIO DE NÍVEL (TUTORIAL) */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isInfoModalOpen}
+          onRequestClose={handleInfoModalClose}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Alert!</Text>
+              <Text style={[styles.modalText, { textAlign: 'center', marginBottom: 24 }]}>
+                {level.pop_up?.text}
+              </Text>
+              <TouchableOpacity onPress={handleInfoModalClose} style={[styles.button, styles.buttonPrimary, styles.modalButton]}>
+                <Text style={styles.buttonTextPrimary}>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+		
+        {/* 2. MODAL DE FIM DE NÍVEL (CONCLUSÃO) */}
         <Modal
           animationType="fade"
           transparent={true}

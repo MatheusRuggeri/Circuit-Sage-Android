@@ -69,3 +69,18 @@ export interface UserProgress {
   awardedAchievements?: Record<string, boolean>; // achievementId: true if awarded
   // Potentially custom sandbox circuits could be stored here too
 }
+
+export interface Level {
+  // ...todas as outras propriedades existentes...
+  levelId: string;
+  levelName: string;
+  nodes: CircuitNode[];
+  connections: Connection[];
+  initialInputs: Record<string, boolean>;
+  targetOutputs: Record<string, boolean>;
+  
+  // Adicione a propriedade pop_up
+  pop_up?: {
+    text: string;
+  };
+}
